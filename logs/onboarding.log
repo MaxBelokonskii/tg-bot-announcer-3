@@ -1,0 +1,4 @@
+{"exists":false,"level":"info","message":"User existence check","service":"onboarding","telegramId":"339828401","timestamp":"2025-09-02T20:53:32.885Z"}
+{"fullName":"Максим","level":"info","message":"User retrieved","service":"onboarding","telegramId":"339828401","timestamp":"2025-09-02T20:53:54.658Z","userId":1}
+{"fullName":"Максим","level":"info","message":"New user created successfully","service":"onboarding","telegramId":"339828401","timestamp":"2025-09-02T20:53:54.659Z","userId":1}
+{"fullName":"Максим","level":"info","message":"User retrieved","service":"onboarding","telegramId":"339828401","timestamp":"2025-09-02T20:54:07.563Z","userId":1}
