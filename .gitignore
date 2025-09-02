@@ -1,0 +1,124 @@
+# Зависимости / Dependencies
+node_modules/
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+package-lock.json
+
+# Переменные окружения / Environment variables
+.env
+.env.local
+.env.development.local
+.env.test.local
+.env.production.local
+
+# Файлы базы данных / Database files
+*.db
+*.sqlite
+*.sqlite3
+database.db
+bot.db
+
+# Логи / Logs
+logs/
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+loglevel.log
+
+# Временные файлы / Temporary files
+tmp/
+temp/
+*.tmp
+*.temp
+
+# Кеш / Cache
+.cache/
+.npm
+.eslintcache
+
+# Файлы редакторов / Editor files
+.vscode/
+.idea/
+*.swp
+*.swo
+*.sublime-*
+
+# Системные файлы / System files
+.DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+ehthumbs.db
+Thumbs.db
+
+# Runtime файлы / Runtime files
+pids
+*.pid
+*.seed
+*.pid.lock
+
+# Покрытие тестов / Coverage directory used by tools like istanbul
+coverage/
+.nyc_output
+
+# Директория инструментов / Instrumentation directory
+.grunt
+
+# node-waf configuration
+.lock-wscript
+
+# Compiled binary addons
+build/Release
+
+# Dependency directories
+jspm_packages/
+
+# Optional npm cache directory
+.npm
+
+# Optional eslint cache
+.eslintcache
+
+# Microbundle cache
+.rpt2_cache/
+.rts2_cache_cjs/
+.rts2_cache_es/
+.rts2_cache_umd/
+
+# Optional REPL history
+.node_repl_history
+
+# Output of 'npm pack'
+*.tgz
+
+# Yarn Integrity file
+.yarn-integrity
+
+# parcel-bundler cache
+.parcel-cache
+
+# next.js build output
+.next
+
+# nuxt.js build output
+.nuxt
+
+# vuepress build output
+.vuepress/dist
+
+# Serverless directories
+.serverless
+
+# FuseBox cache
+.fusebox/
+
+# DynamoDB Local files
+.dynamodb/
+
+# Telegram Bot specific
+bot-token.txt
+session.json
+config.json
