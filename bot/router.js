@@ -1,0 +1,334 @@
+/**
+ * [RU] Маршрутизатор сообщений бота
+ * [EN] Bot message router
+ */
+
+const { OnboardingLogic } = require('../features/onboarding/logic');
+const { MainMenu } = require('../interface/main-menu');
+const { WelcomeScreen } = require('../interface/welcome-screen');
+const { UserResponse } = require('../interface/user-response');
+const { UpcomingEvents } = require('../interface/upcoming-events');
+const texts = require('./texts');
+
+/**
+ * [RU] Класс для маршрутизации сообщений
+ * [EN] Message routing class
+ */
+class MessageRouter {
+  constructor(database, schedulerLogic, deliveryLogic) {
+    this.database = database;
+    this.schedulerLogic = schedulerLogic;
+    this.deliveryLogic = deliveryLogic;
+    
+    // Инициализируем компоненты
+    this.onboarding = new OnboardingLogic(database);
+    this.mainMenu = new MainMenu();
+    this.welcomeScreen = new WelcomeScreen();
+    this.userResponse = new UserResponse(database);
+    this.upcomingEvents = new UpcomingEvents(schedulerLogic);
+  }
+
+  /**
+   * [RU] Обработка команды /start
+   * [EN] Handle /start command
+   */
+  async handleStart(ctx) {
+    try {
+      console.log(`👤 Пользователь ${ctx.from.id} выполнил команду /start`);
+      
+      const result = await this.onboarding.handleStartCommand(ctx);
+      
+      if (result.success && result.user && !result.isNewUser) {
+        // Существующий пользователь - показываем экран возвращения
+        await this.welcomeScreen.showReturning(ctx, result.user);
+      }
+      
+      return result;
+    } catch (error) {
+      console.error('❌ Ошибка обработки команды /start:', error.message);
+      await ctx.reply(texts.errors.general);
+      return { success: false, error: error.message };
+    }
+  }
+
+  /**
+   * [RU] Обработка команды /menu
+   * [EN] Handle /menu command
+   */
+  async handleMenu(ctx) {
+    try {
+      console.log(`📋 Пользователь ${ctx.from.id} запросил главное меню`);
+      
+      // Проверяем, зарегистрирован ли пользователь
+      const user = await this.onboarding.api.getUser(ctx.from.id.toString());
+      
+      if (!user) {
+        await ctx.reply(texts.errors.notRegistered);
+        return { success: false, error: 'User not registered' };
+      }
+      
+      return await this.mainMenu.show(ctx, user);
+    } catch (error) {
+      console.error('❌ Ошибка обработки команды /menu:', error.message);
+      await ctx.reply(texts.errors.general);
+      return { success: false, error: error.message };
+    }
+  }
+
+  /**
+   * [RU] Обработка команды /events
+   * [EN] Handle /events command
+   */
+  async handleEvents(ctx) {
+    try {
+      console.log(`📅 Пользователь ${ctx.from.id} запросил предстоящие события`);
+      
+      return await this.upcomingEvents.showEvents(ctx);
+    } catch (error) {
+      console.error('❌ Ошибка обработки команды /events:', error.message);
+      await ctx.reply(texts.errors.general);
+      return { success: false, error: error.message };
+    }
+  }
+
+  /**
+   * [RU] Обработка команды /responses
+   * [EN] Handle /responses command
+   */
+  async handleResponses(ctx) {
+    try {
+      console.log(`💬 Пользователь ${ctx.from.id} запросил свои ответы`);
+      
+      // Проверяем, зарегистрирован ли пользователь
+      const user = await this.onboarding.api.getUser(ctx.from.id.toString());
+      
+      if (!user) {
+        await ctx.reply(texts.errors.notRegistered);
+        return { success: false, error: 'User not registered' };
+      }
+      
+      return await this.userResponse.showUserResponses(ctx, user.id);
+    } catch (error) {
+      console.error('❌ Ошибка обработки команды /responses:', error.message);
+      await ctx.reply(texts.errors.general);
+      return { success: false, error: error.message };
+    }
+  }
+
+  /**
+   * [RU] Обработка команды /help
+   * [EN] Handle /help command
+   */
+  async handleHelp(ctx) {
+    try {
+      console.log(`❓ Пользователь ${ctx.from.id} запросил справку`);
+      
+      return await this.mainMenu.showHelp(ctx);
+    } catch (error) {
+      console.error('❌ Ошибка обработки команды /help:', error.message);
+      await ctx.reply(texts.errors.general);
+      return { success: false, error: error.message };
+    }
+  }
+
+  /**
+   * [RU] Обработка команды /stats (только для администраторов)
+   * [EN] Handle /stats command (admin only)
+   */
+  async handleStats(ctx) {
+    try {
+      const userId = ctx.from.id.toString();
+      const adminId = process.env.ADMIN_ID;
+      
+      if (!adminId || userId !== adminId) {
+        await ctx.reply('❌ У вас нет прав для выполнения этой команды');
+        return { success: false, error: 'Unauthorized' };
+      }
+      
+      console.log(`📊 Администратор ${ctx.from.id} запросил статистику`);
+      
+      return await this.upcomingEvents.showEventStats(ctx);
+    } catch (error) {
+      console.error('❌ Ошибка обработки команды /stats:', error.message);
+      await ctx.reply(texts.errors.general);
+      return { success: false, error: error.message };
+    }
+  }
+
+  /**
+   * [RU] Обработка callback queries (нажатия кнопок)
+   * [EN] Handle callback queries (button presses)
+   */
+  async handleCallback(ctx) {
+    try {
+      const callbackData = ctx.callbackQuery.data;
+      const userId = ctx.from.id.toString();
+      
+      console.log(`🔘 Пользователь ${ctx.from.id} нажал кнопку: ${callbackData}`);
+      
+      // Проверяем, зарегистрирован ли пользователь (кроме некоторых исключений)
+      const publicCallbacks = ['main_menu', 'help'];
+      if (!publicCallbacks.includes(callbackData)) {
+        const user = await this.onboarding.api.getUser(userId);
+        if (!user) {
+          await ctx.answerCbQuery(texts.errors.notRegistered);
+          await ctx.reply(texts.errors.notRegistered);
+          return { success: false, error: 'User not registered' };
+        }
+      }
+
+      // Маршрутизация по типу callback
+      if (callbackData.startsWith('response_')) {
+        return await this.handleResponseCallback(ctx, callbackData, userId);
+      } else if (callbackData.startsWith('events_page_')) {
+        const page = callbackData.split('_')[2];
+        return await this.upcomingEvents.handlePagination(ctx, page);
+      } else if (callbackData.startsWith('filter_events_')) {
+        const filter = callbackData.split('_')[2];
+        return await this.upcomingEvents.showFilteredEvents(ctx, filter);
+      } else {
+        // Общие callbacks для меню
+        return await this.mainMenu.handleCallback(ctx, callbackData);
+      }
+    } catch (error) {
+      console.error('❌ Ошибка обработки callback:', error.message);
+      await ctx.answerCbQuery(texts.errors.general);
+      return { success: false, error: error.message };
+    }
+  }
+
+  /**
+   * [RU] Обработка callback'ов ответов на события
+   * [EN] Handle event response callbacks
+   */
+  async handleResponseCallback(ctx, callbackData, userId) {
+    try {
+      // Получаем пользователя из базы данных
+      const user = await this.onboarding.api.getUser(userId);
+      if (!user) {
+        throw new Error('User not found');
+      }
+
+      return await this.userResponse.handleEventResponse(ctx, callbackData, user.id);
+    } catch (error) {
+      console.error(`❌ Ошибка обработки response callback (${callbackData}):`, error.message);
+      await ctx.answerCbQuery(texts.errors.general);
+      return { success: false, error: error.message };
+    }
+  }
+
+  /**
+   * [RU] Обработка текстовых сообщений
+   * [EN] Handle text messages
+   */
+  async handleText(ctx) {
+    try {
+      const userId = ctx.from.id.toString();
+      const messageText = ctx.message.text;
+      
+      console.log(`💬 Пользователь ${ctx.from.id} отправил сообщение: ${messageText.substring(0, 50)}...`);
+      
+      // Проверяем, находится ли пользователь в процессе онбординга
+      if (this.onboarding.isUserOnboarding(userId)) {
+        return await this.onboarding.handleOnboardingMessage(ctx);
+      }
+      
+      // Проверяем, зарегистрирован ли пользователь
+      const user = await this.onboarding.api.getUser(userId);
+      if (!user) {
+        await ctx.reply(texts.errors.notRegistered);
+        return { success: false, error: 'User not registered' };
+      }
+      
+      // Обрабатываем как потенциальный ответ на событие
+      const result = await this.userResponse.handleTextResponse(ctx, user.id, messageText);
+      
+      if (!result.success) {
+        // Если это не ответ, показываем подсказку
+        await ctx.reply(`
+Не понимаю сообщение. Используйте команды:
+
+📋 /menu - главное меню
+📅 /events - предстоящие события  
+💬 /responses - мои ответы
+❓ /help - справка
+
+Или отвечайте на события, которые получаете в уведомлениях.
+        `);
+      }
+      
+      return result;
+    } catch (error) {
+      console.error('❌ Ошибка обработки текстового сообщения:', error.message);
+      await ctx.reply(texts.errors.general);
+      return { success: false, error: error.message };
+    }
+  }
+
+  /**
+   * [RU] Обработка неизвестных команд
+   * [EN] Handle unknown commands
+   */
+  async handleUnknownCommand(ctx) {
+    try {
+      console.log(`❓ Пользователь ${ctx.from.id} отправил неизвестную команду`);
+      
+      await ctx.reply(texts.errors.invalidCommand);
+      
+      return { success: false, error: 'Unknown command' };
+    } catch (error) {
+      console.error('❌ Ошибка обработки неизвестной команды:', error.message);
+      return { success: false, error: error.message };
+    }
+  }
+
+  /**
+   * [RU] Периодическая очистка старых состояний
+   * [EN] Periodic cleanup of old states
+   */
+  scheduleCleanup() {
+    // Очищаем старые состояния онбординга каждые 30 минут
+    setInterval(() => {
+      try {
+        this.onboarding.cleanupOldStates();
+        this.deliveryLogic.cleanupCompletedDeliveries();
+        console.log('🧹 Выполнена периодическая очистка состояний');
+      } catch (error) {
+        console.error('❌ Ошибка периодической очистки:', error.message);
+      }
+    }, 30 * 60 * 1000); // 30 минут
+  }
+
+  /**
+   * [RU] Получение статистики маршрутизатора
+   * [EN] Get router statistics
+   */
+  async getRouterStats() {
+    try {
+      const onboardingStats = this.onboarding.getOnboardingStats();
+      const deliveryStats = await this.deliveryLogic.getOverallStats();
+      const schedulerStats = await this.schedulerLogic.getStats();
+      
+      return {
+        success: true,
+        stats: {
+          onboarding: onboardingStats,
+          delivery: deliveryStats.success ? deliveryStats.stats : null,
+          scheduler: schedulerStats.success ? schedulerStats.stats : null,
+          timestamp: new Date().toISOString()
+        }
+      };
+    } catch (error) {
+      console.error('❌ Ошибка получения статистики маршрутизатора:', error.message);
+      
+      return {
+        success: false,
+        error: error.message
+      };
+    }
+  }
+}
+
+module.exports = {
+  MessageRouter
+};
