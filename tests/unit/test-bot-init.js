@@ -5,9 +5,9 @@
  * [EN] Bot initialization test script without Telegram connection
  */
 
-const { getDatabaseConnection } = require('./database/connection');
-const { ReminderSchedulerLogic } = require('./features/reminder-scheduler/logic');
-const { MessageDeliveryLogic } = require('./features/message-delivery/logic');
+const { getDatabaseConnection } = require('../../database/connection');
+const { ReminderSchedulerLogic } = require('../../features/reminder-scheduler/logic');
+const { MessageDeliveryLogic } = require('../../features/message-delivery/logic');
 
 async function testBotInitialization() {
   console.log('🧪 Тестирование инициализации компонентов бота...');
@@ -15,7 +15,7 @@ async function testBotInitialization() {
   try {
     // Инициализируем базу данных
     console.log('\n📊 Инициализация базы данных...');
-    const database = getDatabaseConnection('./bot_database.db');
+    const database = getDatabaseConnection('../../bot_database.db');
     await database.connect();
     console.log('✅ База данных подключена');
 

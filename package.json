@@ -6,7 +6,14 @@
   "scripts": {
     "start": "node bot/index.js",
     "dev": "nodemon bot/index.js",
-    "test": "jest",
+    "test": "jest --config=tests/config/jest.config.js",
+    "test:unit": "jest tests/unit/ --config=tests/config/jest.config.js",
+    "test:integration": "jest tests/integration/ --config=tests/config/jest.config.js",
+    "test:debug": "jest tests/debug/ --config=tests/config/jest.config.js",
+    "test:isolated": "jest tests/isolated/ --config=tests/config/jest.config.js",
+    "test:watch": "jest --config=tests/config/jest.config.js --watch",
+    "test:coverage": "jest --config=tests/config/jest.config.js --coverage",
+    "create-test": "node tests/config/create-test.js",
     "db:migrate": "node database/migrations/migrate.js",
     "db:seed": "node database/migrations/seed.js"
   },

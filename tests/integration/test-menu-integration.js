@@ -8,13 +8,13 @@ const path = require('path');
 const fs = require('fs');
 
 // Импортируем наши классы
-const { AttendanceLogic } = require('./features/attendance/logic');
-const { AttendanceAPI } = require('./features/attendance/api');
-const { EventInfoLogic } = require('./features/event-info/logic');
-const { EventInfoAPI } = require('./features/event-info/api');
-const { AdminLogic } = require('./features/admin/logic');
-const { AdminAPI } = require('./features/admin/api');
-const { MainMenu } = require('./interface/main-menu');
+const { AttendanceLogic } = require('../../features/attendance/logic');
+const { AttendanceAPI } = require('../../features/attendance/api');
+const { EventInfoLogic } = require('../../features/event-info/logic');
+const { EventInfoAPI } = require('../../features/event-info/api');
+const { AdminLogic } = require('../../features/admin/logic');
+const { AdminAPI } = require('../../features/admin/api');
+const { MainMenu } = require('../../interface/main-menu');
 
 /**
  * [RU] Класс для интеграционного тестирования
@@ -39,7 +39,7 @@ class MenuIntegrationTests {
     this.database = new Database(this.testDbPath);
     
     // Создаем таблицы
-    const schemaPath = path.join(__dirname, 'database', 'schema.sql');
+    const schemaPath = path.join(__dirname, '../../database', 'schema.sql');
     const schema = fs.readFileSync(schemaPath, 'utf8');
     
     this.database.exec(schema);

@@ -5,14 +5,14 @@
  * [EN] Database functionality verification script
  */
 
-const { getDatabaseConnection } = require('./database/connection');
+const { getDatabaseConnection } = require('../../database/connection');
 
 async function testDatabaseFunctionality() {
   console.log('🔍 Проверка функциональности базы данных...');
   
   try {
     // Подключаемся к существующей базе
-    const dbConnection = getDatabaseConnection('./bot_database.db');
+    const dbConnection = getDatabaseConnection('../../bot_database.db');
     const db = dbConnection.connect();
     
     console.log('✅ Подключение к базе данных установлено');

@@ -120,8 +120,39 @@ Common utility functions stored in `utils/`:
 
 ## **Testing**
 
-- Unit tests for all utility modules
-- Integration tests for database API
+### **Test Structure**
+- All tests are placed in `tests/` directory
+- Subcategories: `unit/`, `integration/`, `debug/`, `isolated/`
+- New tests created via `npm run create-test`
+
+### **Naming Rules**
+- Prefix `test-` for all test files
+- Placement only in `tests/` directory and subfolders
+- Use templates for consistency
+
+### **Test Scripts**
+- `npm test` - all tests
+- `npm run test:unit` - unit tests
+- `npm run test:integration` - integration tests
+- `npm run test:debug` - debug tests
+- `npm run test:isolated` - isolated tests
+- `npm run test:watch` - with change monitoring
+- `npm run test:coverage` - with code coverage
+
+### **Creating New Tests**
+```bash
+# Unit test
+npm run create-test unit feature-name
+
+# Integration test
+npm run create-test integration workflow-name
+
+# Debug test
+npm run create-test debug issue-name
+
+# Isolated test
+npm run create-test isolated component-name
+```
 
 ### **Test Cases**
 

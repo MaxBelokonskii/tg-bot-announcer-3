@@ -3,10 +3,10 @@
  * [EN] Simple test for basic functionality
  */
 
-const { DatabaseConnection } = require('./database/connection');
-const { AttendanceLogic } = require('./features/attendance/logic');
-const { AdminLogic } = require('./features/admin/logic');
-const { MainMenu } = require('./interface/main-menu');
+const { DatabaseConnection } = require('../../database/connection');
+const { AttendanceLogic } = require('../../features/attendance/logic');
+const { AdminLogic } = require('../../features/admin/logic');
+const { MainMenu } = require('../../interface/main-menu');
 
 async function simpleTest() {
   console.log('🚀 Запуск простого теста функциональности...\n');

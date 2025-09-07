@@ -3,9 +3,9 @@
  * [EN] Test for main menu functionality fix
  */
 
-const { DatabaseConnection } = require('./database/connection');
-const { MainMenu } = require('./interface/main-menu');
-const { createInlineKeyboard } = require('./utils/message-helpers');
+const { DatabaseConnection } = require('../../database/connection');
+const { MainMenu } = require('../../interface/main-menu');
+const { createInlineKeyboard } = require('../../utils/message-helpers');
 
 async function testMenuGeneration() {
   console.log("🧪 Тестирование генерации меню...")

@@ -9,11 +9,11 @@ console.log('🚀 Testing fixed menu button functionality...\n');
 // Test the message helpers functions
 try {
   console.log('1. Testing message-helpers import...');
-  const { createInlineKeyboard, safeSendMessage } = require('./utils/message-helpers');
+  const { createInlineKeyboard, safeSendMessage } = require('../../utils/message-helpers');
   console.log('   ✅ message-helpers imported successfully');
   
   console.log('2. Testing texts import...');
-  const texts = require('./bot/texts');
+  const texts = require('../../bot/texts');
   console.log('   ✅ texts imported successfully');
   console.log('   📝 Menu title:', texts.menu.title);
   
