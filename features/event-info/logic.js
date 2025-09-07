@@ -148,49 +148,10 @@ class EventInfoLogic {
    */
   formatUsefulInfo(info) {
     let formatted = '';
-
-    if (info.transport && info.transport.length > 0) {
-      formatted += '<b>🚗 Транспорт:</b>\n';
-      info.transport.forEach(item => {
+      info.forEach(item => {
         formatted += `• ${item}\n`;
       });
       formatted += '\n';
-    }
-
-    if (info.parking) {
-      formatted += `<b>🅿️ Парковка:</b> ${info.parking}\n\n`;
-    }
-
-    if (info.accommodation && info.accommodation.length > 0) {
-      formatted += '<b>🏨 Размещение:</b>\n';
-      info.accommodation.forEach(item => {
-        formatted += `• ${item}\n`;
-      });
-      formatted += '\n';
-    }
-
-    if (info.attractions && info.attractions.length > 0) {
-      formatted += '<b>🏛️ Достопримечательности:</b>\n';
-      info.attractions.forEach(item => {
-        formatted += `• ${item}\n`;
-      });
-      formatted += '\n';
-    }
-
-    if (info.emergency) {
-      formatted += `<b>🚨 Экстренные контакты:</b> ${info.emergency}\n\n`;
-    }
-
-    if (info.weather) {
-      formatted += `<b>🌤️ Погода:</b> ${info.weather}\n\n`;
-    }
-
-    if (info.additionalInfo && info.additionalInfo.length > 0) {
-      formatted += '<b>ℹ️ Дополнительная информация:</b>\n';
-      info.additionalInfo.forEach(item => {
-        formatted += `• ${item}\n`;
-      });
-    }
 
     return formatted.trim() || 'Полезная информация будет добавлена позже.';
   }

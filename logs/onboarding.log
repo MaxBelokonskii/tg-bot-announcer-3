@@ -18,3 +18,18 @@
 {"fullName":"Максим","level":"info","message":"User retrieved","service":"onboarding","telegramId":"339828401","timestamp":"2025-09-07T12:59:25.528Z","userId":3}
 {"fullName":"Максим","level":"info","message":"User retrieved","service":"onboarding","telegramId":"339828401","timestamp":"2025-09-07T12:59:30.956Z","userId":3}
 {"fullName":"Максим","level":"info","message":"User retrieved","service":"onboarding","telegramId":"339828401","timestamp":"2025-09-07T12:59:40.193Z","userId":3}
+{"exists":false,"level":"info","message":"User existence check","service":"onboarding","telegramId":"339828401","timestamp":"2025-09-07T13:26:46.084Z"}
+{"fullName":"Максим","level":"info","message":"User retrieved","service":"onboarding","telegramId":"339828401","timestamp":"2025-09-07T13:26:55.328Z","userId":1}
+{"fullName":"Максим","level":"info","message":"New user created successfully","service":"onboarding","telegramId":"339828401","timestamp":"2025-09-07T13:26:55.329Z","userId":1}
+{"fullName":"Максим","level":"info","message":"User retrieved","service":"onboarding","telegramId":"339828401","timestamp":"2025-09-07T13:26:57.285Z","userId":1}
+{"fullName":"Максим","level":"info","message":"User retrieved","service":"onboarding","telegramId":"339828401","timestamp":"2025-09-07T13:26:59.980Z","userId":1}
+{"fullName":"Максим","level":"info","message":"User retrieved","service":"onboarding","telegramId":"339828401","timestamp":"2025-09-07T13:27:13.515Z","userId":1}
+{"fullName":"Максим","level":"info","message":"User retrieved","service":"onboarding","telegramId":"339828401","timestamp":"2025-09-07T13:27:18.079Z","userId":1}
+{"fullName":"Максим","level":"info","message":"User retrieved","service":"onboarding","telegramId":"339828401","timestamp":"2025-09-07T13:27:32.667Z","userId":1}
+{"fullName":"Максим","level":"info","message":"User retrieved","service":"onboarding","telegramId":"339828401","timestamp":"2025-09-07T13:27:36.151Z","userId":1}
+{"fullName":"Максим","level":"info","message":"User retrieved","service":"onboarding","telegramId":"339828401","timestamp":"2025-09-07T13:27:42.848Z","userId":1}
+{"fullName":"Максим","level":"info","message":"User retrieved","service":"onboarding","telegramId":"339828401","timestamp":"2025-09-07T13:39:40.401Z","userId":1}
+{"fullName":"Максим","level":"info","message":"User retrieved","service":"onboarding","telegramId":"339828401","timestamp":"2025-09-07T13:39:54.659Z","userId":1}
+{"fullName":"Максим","level":"info","message":"User retrieved","service":"onboarding","telegramId":"339828401","timestamp":"2025-09-07T13:42:14.809Z","userId":1}
+{"fullName":"Максим","level":"info","message":"User retrieved","service":"onboarding","telegramId":"339828401","timestamp":"2025-09-07T13:42:42.698Z","userId":1}
+{"fullName":"Максим","level":"info","message":"User retrieved","service":"onboarding","telegramId":"339828401","timestamp":"2025-09-07T13:42:48.949Z","userId":1}
