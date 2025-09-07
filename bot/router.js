@@ -17,10 +17,11 @@ const texts = require('./texts');
  * [EN] Message routing class
  */
 class MessageRouter {
-  constructor(database, schedulerLogic, deliveryLogic) {
+  constructor(database, schedulerLogic, deliveryLogic, bot = null) {
     this.database = database;
     this.schedulerLogic = schedulerLogic;
     this.deliveryLogic = deliveryLogic;
+    this.bot = bot; // Сохраняем ссылку на экземпляр бота
     
     // Инициализируем компоненты
     this.onboarding = new OnboardingLogic(database);
@@ -30,6 +31,14 @@ class MessageRouter {
     this.attendanceLogic = new AttendanceLogic(database);
     this.eventInfoLogic = new EventInfoLogic(database);
     this.adminLogic = new AdminLogic(database);
+  }
+
+  /**
+   * [RU] Установка экземпляра бота (если не был передан в конструкторе)
+   * [EN] Set bot instance (if not passed in constructor)
+   */
+  setBotInstance(bot) {
+    this.bot = bot;
   }
 
   /**
@@ -108,6 +117,31 @@ class MessageRouter {
 
 
   /**
+   * [RU] Обработка команды /admin_message (только для администраторов)
+   * [EN] Handle /admin_message command (admin only)
+   */
+  async handleAdminMessage(ctx, bot) {
+    try {
+      const userId = ctx.from.id.toString();
+      
+      if (!this.adminLogic.isAdmin(userId)) {
+        await ctx.reply('❌ У вас нет прав для выполнения этой команды');
+        return { success: false, error: 'Unauthorized' };
+      }
+      
+      console.log(`📢 Администратор ${ctx.from.id} выполнил команду /admin_message`);
+      
+      return await this.adminLogic.handleAdminMessage(ctx, bot);
+    } catch (error) {
+      console.error('❌ Ошибка обработки команды /admin_message:', error.message);
+      await ctx.reply(texts.errors.general);
+      return { success: false, error: error.message };
+    }
+  }
+
+
+
+  /**
    * [RU] Обработка команды /stats (только для администраторов)
    * [EN] Handle /stats command (admin only)
    */
@@ -162,7 +196,18 @@ class MessageRouter {
       } else if (callbackData.startsWith('admin_')) {
         // Проверяем права администратора
         await this.adminLogic.validateAdminCallback(ctx, callbackData);
-        return await this.mainMenu.handleCallback(ctx, callbackData);
+        
+        // Обрабатываем специальные админские команды
+        if (callbackData === 'admin_confirm_send') {
+          if (!this.bot) {
+            throw new Error('Bot instance not available for admin message sending');
+          }
+          return await this.adminLogic.confirmMessageSending(ctx, this.bot);
+        } else if (callbackData === 'admin_cancel_send') {
+          return await this.adminLogic.cancelMessageSending(ctx);
+        } else {
+          return await this.mainMenu.handleCallback(ctx, callbackData);
+        }
       } else {
         // Общие callbacks для меню
         return await this.mainMenu.handleCallback(ctx, callbackData);

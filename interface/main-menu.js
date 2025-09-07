@@ -35,9 +35,10 @@ class MainMenu {
       { text: texts.menu.buttons.usefulInfo, callback_data: 'useful_info' }
     ];
 
-    // Добавляем админскую кнопку для администраторов
+    // Добавляем админские кнопки для администраторов
     if (isAdmin) {
       menuItems.splice(3, 0, { text: texts.menu.buttons.adminGuestList, callback_data: 'admin_guest_list' });
+      menuItems.splice(4, 0, { text: texts.admin.message.buttons.send, callback_data: 'admin_send_test_message' });
     }
 
     return menuItems;
@@ -126,6 +127,21 @@ class MainMenu {
         
         case 'admin_refresh_guest_list':
           return await this.adminLogic.showGuestList(ctx);
+        
+        case 'admin_send_test_message':
+          return await this.adminLogic.handleAdminMessage(ctx, ctx.telegram);
+        
+        case 'admin_confirm_send':
+          return await this.adminLogic.confirmMessageSending(ctx, ctx.telegram);
+        
+        case 'admin_confirm_standard':
+          return await this.adminLogic.confirmStandardBroadcast(ctx, ctx.telegram);
+        
+        case 'admin_confirm_enhanced':
+          return await this.adminLogic.confirmEnhancedBroadcast(ctx, ctx.telegram);
+        
+        case 'admin_cancel_send':
+          return await this.adminLogic.cancelMessageSending(ctx);
         
         case 'my_responses':
           return await this.showMyResponses(ctx);

@@ -13,7 +13,7 @@ async function initializeDatabase() {
   
   try {
     // Удаляем существующую базу если есть
-    const dbPath = process.env.DATABASE_PATH || './bot_database.db';
+    const dbPath = process.env.DATABASE_PATH || './database/bot_database.db';
     if (fs.existsSync(dbPath)) {
       fs.unlinkSync(dbPath);
       console.log('🗑️ Удалена старая база данных');
@@ -50,34 +50,79 @@ async function initializeDatabase() {
       console.error('❌ Колонка attendance_status отсутствует!');
       process.exit(1);
     }
+
+    // Проверяем что колонка username существует
+    const hasUsername = userTableInfo.some(col => col.name === 'username');
+    if (hasUsername) {
+      console.log('✅ Колонка username найдена');
+    } else {
+      console.error('❌ Колонка username отсутствует!');
+      process.exit(1);
+    }
+
+    // Проверяем индексы
+    console.log('\n🔍 Проверка индексов:');
+    const indexes = db.prepare(`PRAGMA index_list(users)`).all();
+    
+    const requiredIndexes = ['idx_users_telegram_id', 'idx_users_username', 'idx_users_attendance'];
+    const existingIndexes = indexes.map(idx => idx.name);
+    
+    requiredIndexes.forEach(indexName => {
+      if (existingIndexes.includes(indexName)) {
+        console.log(`✅ Индекс ${indexName} найден`);
+      } else {
+        console.warn(`⚠️ Индекс ${indexName} отсутствует`);
+      }
+    });
     
     // Создаем тестового пользователя для проверки
     try {
+      // Тест 1: Пользователь с username
       const insertUser = db.prepare(`
-        INSERT INTO users (telegram_id, full_name, attendance_status) 
-        VALUES (?, ?, ?)
+        INSERT INTO users (telegram_id, full_name, username, attendance_status) 
+        VALUES (?, ?, ?, ?)
       `);
       
-      insertUser.run('test_123', 'Тестовый Пользователь', 'attending');
-      console.log('✅ Тестовый пользователь создан');
+      insertUser.run('test_123', 'Тестовый Пользователь', 'test_user', 'attending');
+      console.log('✅ Тестовый пользователь с username создан');
       
       // Проверяем что пользователь создался
       const user = db.prepare(`
-        SELECT telegram_id, full_name, attendance_status 
+        SELECT telegram_id, full_name, username, attendance_status 
         FROM users 
         WHERE telegram_id = ?
       `).get('test_123');
       
-      if (user) {
-        console.log(`✅ Тестовый пользователь найден: ${user.full_name} (${user.attendance_status})`);
+      if (user && user.username === 'test_user') {
+        console.log(`✅ Тестовый пользователь найден: ${user.full_name} (@${user.username}) (${user.attendance_status})`);
         
-        // Удаляем тестового пользователя
-        db.prepare('DELETE FROM users WHERE telegram_id = ?').run('test_123');
-        console.log('🧹 Тестовый пользователь удален');
+        // Тест обновления username
+        const updateResult = db.prepare(`
+          UPDATE users 
+          SET username = ? 
+          WHERE telegram_id = ?
+        `).run('updated_user', 'test_123');
+        
+        if (updateResult.changes > 0) {
+          console.log('✅ Обновление username работает');
+        } else {
+          console.warn('⚠️ Обновление username не сработало');
+        }
+      } else {
+        console.error('❌ Ошибка: пользователь с username не найден или username некорректен');
+        process.exit(1);
       }
       
+      // Тест 2: Пользователь без username (обратная совместимость)
+      insertUser.run('test_456', 'Пользователь без Username', null, 'attending');
+      console.log('✅ Пользователь без username создан (обратная совместимость)');
+      
+      // Удаляем тестовых пользователей
+      db.prepare('DELETE FROM users WHERE telegram_id IN (?, ?)').run('test_123', 'test_456');
+      console.log('🧹 Тестовые пользователи удалены');
+      
     } catch (error) {
-      console.error('❌ Ошибка работы с attendance_status:', error.message);
+      console.error('❌ Ошибка работы с username:', error.message);
       process.exit(1);
     }
     

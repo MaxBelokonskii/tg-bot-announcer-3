@@ -30,9 +30,9 @@ class AttendanceLogic {
       
       // Создаем кнопки для выбора статуса
       const statusButtons = [
-        { text: texts.attendance.options.attending, callback: 'attendance_attending' },
-        { text: texts.attendance.options.notAttending, callback: 'attendance_not_attending' },
-        { text: texts.attendance.options.maybe, callback: 'attendance_maybe' }
+        { text: texts.attendance.options.attending, callback_data: 'attendance_attending' },
+        { text: texts.attendance.options.notAttending, callback_data: 'attendance_not_attending' },
+        { text: texts.attendance.options.maybe, callback_data: 'attendance_maybe' }
       ];
 
       statusButtons.push(standardButtons.mainMenu);

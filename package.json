@@ -14,7 +14,7 @@
     "test:watch": "jest --config=tests/config/jest.config.js --watch",
     "test:coverage": "jest --config=tests/config/jest.config.js --coverage",
     "create-test": "node tests/config/create-test.js",
-    "db:migrate": "node database/migrations/migrate.js",
+    "db:migrate": "node database/migrate-add-username.js",
     "db:seed": "node database/migrations/seed.js"
   },
   "keywords": [

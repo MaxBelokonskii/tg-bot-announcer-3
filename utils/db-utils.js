@@ -187,18 +187,20 @@ class DatabaseUtils {
 
 class UserUtils extends DatabaseUtils {
   /**
-   * Создание пользователя
+   * [RU] Создание пользователя
+   * [EN] Create user
    */
-  createUser(telegramId, fullName) {
+  createUser(telegramId, fullName, username = null) {
     const query = `
-      INSERT INTO users (telegram_id, full_name) 
-      VALUES (?, ?)
+      INSERT INTO users (telegram_id, full_name, username) 
+      VALUES (?, ?, ?)
     `;
-    return this.insertRecord(query, [telegramId, fullName]);
+    return this.insertRecord(query, [telegramId, fullName, this.validateUsername(username)]);
   }
 
   /**
-   * Поиск пользователя по Telegram ID
+   * [RU] Поиск пользователя по Telegram ID
+   * [EN] Find user by Telegram ID
    */
   findUserByTelegramId(telegramId) {
     const query = `SELECT * FROM users WHERE telegram_id = ?`;
@@ -206,23 +208,105 @@ class UserUtils extends DatabaseUtils {
   }
 
   /**
-   * Получение всех пользователей
+   * [RU] Поиск пользователя по username
+   * [EN] Find user by username
+   */
+  findUserByUsername(username) {
+    if (!username) return null;
+    const cleanUsername = this.validateUsername(username);
+    if (!cleanUsername) return null;
+    
+    const query = `SELECT * FROM users WHERE username = ?`;
+    return this.getOne(query, [cleanUsername]);
+  }
+
+  /**
+   * [RU] Получение всех пользователей
+   * [EN] Get all users
    */
   getAllUsers() {
-    const query = `SELECT * FROM users ORDER BY created_at DESC`;
+    const query = `
+      SELECT id, telegram_id, username, full_name, 
+             attendance_status, attendance_updated_at, 
+             created_at, updated_at 
+      FROM users 
+      ORDER BY created_at DESC
+    `;
     return this.getMany(query);
   }
 
   /**
-   * Обновление информации пользователя
+   * [RU] Обновление информации пользователя
+   * [EN] Update user information
    */
   updateUser(userId, data) {
+    // Валидируем username если он присутствует
+    if (data.hasOwnProperty('username')) {
+      data.username = this.validateUsername(data.username);
+    }
+
     const fields = Object.keys(data).map(key => `${key} = ?`).join(', ');
     const values = Object.values(data);
     values.push(userId);
 
     const query = `UPDATE users SET ${fields} WHERE id = ?`;
     return this.updateRecord(query, values);
+  }
+
+  /**
+   * [RU] Обновление username пользователя
+   * [EN] Update user username
+   */
+  updateUsername(telegramId, username) {
+    const validatedUsername = this.validateUsername(username);
+    const query = `
+      UPDATE users 
+      SET username = ?, updated_at = CURRENT_TIMESTAMP 
+      WHERE telegram_id = ?
+    `;
+    return this.updateRecord(query, [validatedUsername, telegramId]);
+  }
+
+  /**
+   * [RU] Валидация username
+   * [EN] Validate username
+   */
+  validateUsername(username) {
+    if (!username || typeof username !== 'string') return null;
+
+    // Удаляем @ префикс если он есть
+    const cleanUsername = username.startsWith('@') ? username.slice(1) : username;
+
+    // Проверяем длину username
+    if (cleanUsername.length < 5 || cleanUsername.length > 32) {
+      return null;
+    }
+
+    // Только буквы, цифры и подчеркивания
+    const usernameRegex = /^[a-zA-Z0-9_]+$/;
+    if (!usernameRegex.test(cleanUsername)) {
+      return null;
+    }
+
+    return cleanUsername;
+  }
+
+  /**
+   * [RU] Поиск пользователей по частичному совпадению username
+   * [EN] Search users by partial username match
+   */
+  searchUsersByUsername(partialUsername) {
+    if (!partialUsername || typeof partialUsername !== 'string') return [];
+    
+    const searchTerm = `%${partialUsername}%`;
+    const query = `
+      SELECT id, telegram_id, username, full_name, attendance_status 
+      FROM users 
+      WHERE username LIKE ? 
+      ORDER BY username ASC
+      LIMIT 20
+    `;
+    return this.getMany(query, [searchTerm]);
   }
 }
 

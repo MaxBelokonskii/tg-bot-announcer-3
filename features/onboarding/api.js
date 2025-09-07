@@ -94,7 +94,7 @@ class OnboardingAPI {
    * [RU] Создание нового пользователя
    * [EN] Create new user
    */
-  async createUser(telegramId, fullName) {
+  async createUser(telegramId, fullName, username = null) {
     try {
       // Проверяем, не существует ли уже пользователь
       const existingUser = await this.getUser(telegramId);
@@ -116,8 +116,8 @@ class OnboardingAPI {
         throw new Error('Некорректные данные пользователя');
       }
 
-      // Создаем пользователя
-      const result = this.userUtils.createUser(telegramId, fullName.trim());
+      // Создаем пользователя с username
+      const result = this.userUtils.createUser(telegramId, fullName.trim(), username);
       
       if (!result.success) {
         throw new Error('Не удалось создать пользователя в базе данных');
@@ -129,6 +129,7 @@ class OnboardingAPI {
       logger.info('New user created successfully', {
         userId: newUser.id,
         telegramId: newUser.telegram_id,
+        username: newUser.username,
         fullName: newUser.full_name
       });
 
@@ -141,6 +142,7 @@ class OnboardingAPI {
       logger.error('Error creating user', {
         telegramId,
         fullName,
+        username,
         error: error.message
       });
       
@@ -163,7 +165,7 @@ class OnboardingAPI {
       }
 
       // Фильтруем разрешенные поля для обновления
-      const allowedFields = ['full_name'];
+      const allowedFields = ['full_name', 'username'];
       const filteredData = {};
       
       for (const [key, value] of Object.entries(updateData)) {
