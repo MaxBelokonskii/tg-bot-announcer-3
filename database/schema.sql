@@ -7,6 +7,8 @@ CREATE TABLE IF NOT EXISTS users (
     id INTEGER PRIMARY KEY AUTOINCREMENT,
     telegram_id TEXT UNIQUE NOT NULL,
     full_name TEXT NOT NULL,
+    attendance_status TEXT DEFAULT 'attending' CHECK (attendance_status IN ('attending', 'not_attending', 'maybe')),
+    attendance_updated_at DATETIME DEFAULT CURRENT_TIMESTAMP,
     created_at DATETIME DEFAULT CURRENT_TIMESTAMP,
     updated_at DATETIME DEFAULT CURRENT_TIMESTAMP
 );
@@ -44,6 +46,7 @@ CREATE TABLE IF NOT EXISTS delivery_logs (
 
 -- Индексы для оптимизации запросов
 CREATE INDEX IF NOT EXISTS idx_users_telegram_id ON users(telegram_id);
+CREATE INDEX IF NOT EXISTS idx_users_attendance ON users(attendance_status);
 CREATE INDEX IF NOT EXISTS idx_user_responses_user ON user_responses(user_id);
 CREATE INDEX IF NOT EXISTS idx_scheduled_messages_date ON scheduled_messages(send_date);
 CREATE INDEX IF NOT EXISTS idx_scheduled_messages_status ON scheduled_messages(status);

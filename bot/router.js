@@ -8,6 +8,9 @@ const { MainMenu } = require('../interface/main-menu');
 const { WelcomeScreen } = require('../interface/welcome-screen');
 const { UserResponse } = require('../interface/user-response');
 const { UpcomingEvents } = require('../interface/upcoming-events');
+const { AttendanceLogic } = require('../features/attendance/logic');
+const { EventInfoLogic } = require('../features/event-info/logic');
+const { AdminLogic } = require('../features/admin/logic');
 const texts = require('./texts');
 
 /**
@@ -22,10 +25,13 @@ class MessageRouter {
     
     // Инициализируем компоненты
     this.onboarding = new OnboardingLogic(database);
-    this.mainMenu = new MainMenu();
+    this.mainMenu = new MainMenu(database);
     this.welcomeScreen = new WelcomeScreen();
     this.userResponse = new UserResponse(database);
     this.upcomingEvents = new UpcomingEvents(schedulerLogic);
+    this.attendanceLogic = new AttendanceLogic(database);
+    this.eventInfoLogic = new EventInfoLogic(database);
+    this.adminLogic = new AdminLogic(database);
   }
 
   /**
@@ -186,6 +192,13 @@ class MessageRouter {
       } else if (callbackData.startsWith('filter_events_')) {
         const filter = callbackData.split('_')[2];
         return await this.upcomingEvents.showFilteredEvents(ctx, filter);
+      } else if (callbackData.startsWith('attendance_')) {
+        // Обработка выбора статуса присутствия
+        return await this.mainMenu.handleCallback(ctx, callbackData);
+      } else if (callbackData.startsWith('admin_')) {
+        // Проверяем права администратора
+        await this.adminLogic.validateAdminCallback(ctx, callbackData);
+        return await this.mainMenu.handleCallback(ctx, callbackData);
       } else {
         // Общие callbacks для меню
         return await this.mainMenu.handleCallback(ctx, callbackData);

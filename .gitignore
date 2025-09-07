@@ -122,3 +122,5 @@ jspm_packages/
 bot-token.txt
 session.json
 config.json
+
+*.db
