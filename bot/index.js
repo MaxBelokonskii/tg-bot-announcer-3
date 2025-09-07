@@ -146,19 +146,9 @@ class TelegramBot {
       await this.router.handleMenu(ctx);
     });
 
-    // Команда /events
-    this.bot.command('events', async (ctx) => {
-      await this.router.handleEvents(ctx);
-    });
-
     // Команда /responses
     this.bot.command('responses', async (ctx) => {
       await this.router.handleResponses(ctx);
-    });
-
-    // Команда /help
-    this.bot.help(async (ctx) => {
-      await this.router.handleHelp(ctx);
     });
 
     // Команда /stats (для администратора)

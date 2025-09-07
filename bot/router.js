@@ -7,7 +7,6 @@ const { OnboardingLogic } = require('../features/onboarding/logic');
 const { MainMenu } = require('../interface/main-menu');
 const { WelcomeScreen } = require('../interface/welcome-screen');
 const { UserResponse } = require('../interface/user-response');
-const { UpcomingEvents } = require('../interface/upcoming-events');
 const { AttendanceLogic } = require('../features/attendance/logic');
 const { EventInfoLogic } = require('../features/event-info/logic');
 const { AdminLogic } = require('../features/admin/logic');
@@ -28,7 +27,6 @@ class MessageRouter {
     this.mainMenu = new MainMenu(database);
     this.welcomeScreen = new WelcomeScreen();
     this.userResponse = new UserResponse(database);
-    this.upcomingEvents = new UpcomingEvents(schedulerLogic);
     this.attendanceLogic = new AttendanceLogic(database);
     this.eventInfoLogic = new EventInfoLogic(database);
     this.adminLogic = new AdminLogic(database);
@@ -81,21 +79,7 @@ class MessageRouter {
     }
   }
 
-  /**
-   * [RU] Обработка команды /events
-   * [EN] Handle /events command
-   */
-  async handleEvents(ctx) {
-    try {
-      console.log(`📅 Пользователь ${ctx.from.id} запросил предстоящие события`);
-      
-      return await this.upcomingEvents.showEvents(ctx);
-    } catch (error) {
-      console.error('❌ Ошибка обработки команды /events:', error.message);
-      await ctx.reply(texts.errors.general);
-      return { success: false, error: error.message };
-    }
-  }
+
 
   /**
    * [RU] Обработка команды /responses
@@ -121,21 +105,7 @@ class MessageRouter {
     }
   }
 
-  /**
-   * [RU] Обработка команды /help
-   * [EN] Handle /help command
-   */
-  async handleHelp(ctx) {
-    try {
-      console.log(`❓ Пользователь ${ctx.from.id} запросил справку`);
-      
-      return await this.mainMenu.showHelp(ctx);
-    } catch (error) {
-      console.error('❌ Ошибка обработки команды /help:', error.message);
-      await ctx.reply(texts.errors.general);
-      return { success: false, error: error.message };
-    }
-  }
+
 
   /**
    * [RU] Обработка команды /stats (только для администраторов)
@@ -153,7 +123,7 @@ class MessageRouter {
       
       console.log(`📊 Администратор ${ctx.from.id} запросил статистику`);
       
-      return await this.upcomingEvents.showEventStats(ctx);
+      return await this.adminLogic.showStats(ctx);
     } catch (error) {
       console.error('❌ Ошибка обработки команды /stats:', error.message);
       await ctx.reply(texts.errors.general);
@@ -173,7 +143,7 @@ class MessageRouter {
       console.log(`🔘 Пользователь ${ctx.from.id} нажал кнопку: ${callbackData}`);
       
       // Проверяем, зарегистрирован ли пользователь (кроме некоторых исключений)
-      const publicCallbacks = ['main_menu', 'help'];
+      const publicCallbacks = ['main_menu'];
       if (!publicCallbacks.includes(callbackData)) {
         const user = await this.onboarding.api.getUser(userId);
         if (!user) {
@@ -186,12 +156,6 @@ class MessageRouter {
       // Маршрутизация по типу callback
       if (callbackData.startsWith('response_')) {
         return await this.handleResponseCallback(ctx, callbackData, userId);
-      } else if (callbackData.startsWith('events_page_')) {
-        const page = callbackData.split('_')[2];
-        return await this.upcomingEvents.handlePagination(ctx, page);
-      } else if (callbackData.startsWith('filter_events_')) {
-        const filter = callbackData.split('_')[2];
-        return await this.upcomingEvents.showFilteredEvents(ctx, filter);
       } else if (callbackData.startsWith('attendance_')) {
         // Обработка выбора статуса присутствия
         return await this.mainMenu.handleCallback(ctx, callbackData);
@@ -262,9 +226,7 @@ class MessageRouter {
 Не понимаю сообщение. Используйте команды:
 
 📋 /menu - главное меню
-📅 /events - предстоящие события  
 💬 /responses - мои ответы
-❓ /help - справка
 
 Или отвечайте на события, которые получаете в уведомлениях.
         `);
