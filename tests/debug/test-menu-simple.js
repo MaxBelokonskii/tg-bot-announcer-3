@@ -3,8 +3,8 @@
  * [EN] Simple test for main menu functionality fix
  */
 
-const texts = require('./bot/texts');
-const { createInlineKeyboard } = require('./utils/message-helpers');
+const texts = require('../../bot/texts');
+const { createInlineKeyboard } = require('../../utils/message-helpers');
 
 // Mock для AdminLogic для тестирования
 class MockAdminLogic {

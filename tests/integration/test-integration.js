@@ -6,10 +6,10 @@
  */
 
 require('dotenv').config();
-const { getDatabaseConnection } = require('./database/connection');
-const { OnboardingAPI } = require('./features/onboarding/api');
-const { ReminderSchedulerAPI } = require('./features/reminder-scheduler/api');
-const { MessageDeliveryAPI } = require('./features/message-delivery/api');
+const { getDatabaseConnection } = require('../../database/connection');
+const { OnboardingAPI } = require('../../features/onboarding/api');
+const { ReminderSchedulerAPI } = require('../../features/reminder-scheduler/api');
+const { MessageDeliveryAPI } = require('../../features/message-delivery/api');
 
 console.log('🧪 Запуск тестов интеграции модулей...\n');
 
@@ -17,7 +17,7 @@ async function testDatabaseConnection() {
   console.log('📊 Тестирование подключения к базе данных...');
   
   try {
-    const db = getDatabaseConnection('./test_database.db');
+    const db = getDatabaseConnection('../../test_database.db');
     await db.connect();
     
     console.log('✅ База данных подключена');
@@ -49,7 +49,7 @@ async function testOnboardingModule() {
   console.log('\n👤 Тестирование модуля онбординга...');
   
   try {
-    const db = getDatabaseConnection('./test_database.db');
+    const db = getDatabaseConnection('../../test_database.db');
     await db.connect();
     
     const api = new OnboardingAPI(db.getDatabase());
@@ -90,7 +90,7 @@ async function testSchedulerModule() {
   console.log('\n⏰ Тестирование планировщика напоминаний...');
   
   try {
-    const db = getDatabaseConnection('./test_database.db');
+    const db = getDatabaseConnection('../../test_database.db');
     await db.connect();
     
     const api = new ReminderSchedulerAPI(db.getDatabase());
@@ -139,7 +139,7 @@ async function testDeliveryModule() {
   console.log('\n📨 Тестирование модуля доставки...');
   
   try {
-    const db = getDatabaseConnection('./test_database.db');
+    const db = getDatabaseConnection('../../test_database.db');
     await db.connect();
     
     const api = new MessageDeliveryAPI(db.getDatabase());
@@ -188,7 +188,7 @@ async function cleanupTestData() {
   
   try {
     const fs = require('fs');
-    const testDbPath = './test_database.db';
+    const testDbPath = '../../test_database.db';
     
     if (fs.existsSync(testDbPath)) {
       fs.unlinkSync(testDbPath);

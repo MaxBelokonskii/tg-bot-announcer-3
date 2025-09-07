@@ -64,6 +64,32 @@ pids
 coverage/
 .nyc_output
 
+# Тестовые базы данных / Test databases
+tests/**/*.db
+tests/**/*.sqlite
+tests/**/*.sqlite3
+test_*.db
+test_*.sqlite
+test_*.sqlite3
+
+# Временные тестовые файлы / Temporary test files
+tests/tmp/
+tests/temp/
+tests/**/*.tmp
+tests/**/*.temp
+
+# Jest кеш / Jest cache
+tests/.cache/
+.jest/
+
+# Отчеты тестирования / Test reports
+tests/reports/
+test-results/
+
+# Скриншоты тестов / Test screenshots
+tests/screenshots/
+tests/videos/
+
 # Директория инструментов / Instrumentation directory
 .grunt
 

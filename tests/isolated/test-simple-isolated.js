@@ -7,11 +7,11 @@ console.log('Starting simple menu test...');
 // Test 1: Basic require
 try {
   console.log('1. Testing basic requires...');
-  const texts = require('./bot/texts');
+  const texts = require('../../bot/texts');
   console.log('   texts.js loaded:', !!texts);
   console.log('   menu title:', texts.menu.title);
   
-  const { createInlineKeyboard } = require('./utils/message-helpers');
+  const { createInlineKeyboard } = require('../../utils/message-helpers');
   console.log('   message-helpers loaded:', !!createInlineKeyboard);
 } catch (error) {
   console.error('   Error in requires:', error.message);
@@ -21,7 +21,7 @@ try {
 // Test 2: Button creation
 try {
   console.log('2. Testing button creation...');
-  const { createInlineKeyboard } = require('./utils/message-helpers');
+  const { createInlineKeyboard } = require('../../utils/message-helpers');
   
   const testButtons = [
     { text: 'Button 1', callback_data: 'test1' },
@@ -38,7 +38,7 @@ try {
 // Test 3: Text loading
 try {
   console.log('3. Testing menu texts...');
-  const texts = require('./bot/texts');
+  const texts = require('../../bot/texts');
   
   console.log('   Menu buttons object exists:', !!texts.menu.buttons);
   console.log('   Change attendance button:', texts.menu.buttons.changeAttendance);

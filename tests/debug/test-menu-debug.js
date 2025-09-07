@@ -32,8 +32,8 @@ require = function(id) {
   return originalRequire(id);
 };
 
-const { createInlineKeyboard } = originalRequire('./utils/message-helpers');
-const texts = originalRequire('./bot/texts');
+const { createInlineKeyboard } = originalRequire('../../utils/message-helpers');
+const texts = originalRequire('../../bot/texts');
 
 // Create a simplified MainMenu class for testing
 class TestMainMenu {

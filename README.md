@@ -35,17 +35,46 @@ npm start
 
 ### Тестирование
 
-Для проверки работоспособности компонентов:
+#### Структура тестов
+
+- `tests/unit/` - Модульные тесты отдельных функций и модулей
+- `tests/integration/` - Интеграционные тесты взаимодействия компонентов
+- `tests/debug/` - Отладочные тесты для диагностики проблем
+- `tests/isolated/` - Изолированные тесты компонентов
+
+#### Запуск тестов
 
 ```bash
-# Проверка базы данных
-node test-database.js
+# Все тесты
+npm test
 
-# Проверка инициализации компонентов
-node test-bot-init.js
+# По типу
+npm run test:unit
+npm run test:integration
+npm run test:debug
+npm run test:isolated
 
-# Полное интеграционное тестирование
-node test-integration.js
+# С отслеживанием изменений
+npm run test:watch
+
+# С покрытием кода
+npm run test:coverage
+```
+
+#### Создание новых тестов
+
+```bash
+# Создание модульного теста
+npm run create-test unit feature-name
+
+# Создание интеграционного теста
+npm run create-test integration workflow-name
+
+# Создание отладочного теста
+npm run create-test debug issue-name
+
+# Создание изолированного теста
+npm run create-test isolated component-name
 ```
 
 ## Основные функции
@@ -67,6 +96,12 @@ node test-integration.js
 │   └── message-delivery/ # Доставка сообщений
 ├── interface/            # UI компоненты
 ├── utils/               # Утилиты
+├── tests/               # Тестирование
+│   ├── unit/           # Модульные тесты
+│   ├── integration/    # Интеграционные тесты
+│   ├── debug/          # Отладочные тесты
+│   ├── isolated/       # Изолированные тесты
+│   └── config/         # Конфигурация тестов
 └── docs/               # Документация
 ```
 
