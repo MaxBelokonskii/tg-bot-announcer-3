@@ -42,9 +42,13 @@ class TelegramBot {
       console.log('✅ Telegraf инициализирован');
 
       // Инициализируем базу данных
-      this.database = getDatabaseConnection(process.env.DATABASE_PATH || './bot_database.db');
+      this.database = getDatabaseConnection(process.env.DATABASE_PATH || './database/bot_database.db');
       await this.database.connect();
       console.log('✅ База данных подключена');
+
+      // Валидация базы данных
+      await this.validateDatabase();
+      console.log('✅ База данных валидирована');
 
       // Инициализируем планировщик напоминаний
       this.scheduler = new ReminderSchedulerLogic(this.database.getDatabase(), this.bot);
@@ -58,7 +62,8 @@ class TelegramBot {
       this.router = new MessageRouter(
         this.database.getDatabase(),
         this.scheduler,
-        this.delivery
+        this.delivery,
+        this.bot
       );
       console.log('✅ Маршрутизатор сообщений инициализирован');
 
@@ -81,6 +86,53 @@ class TelegramBot {
     } catch (error) {
       console.error('❌ Ошибка инициализации бота:', error.message);
       return { success: false, error: error.message };
+    }
+  }
+
+  /**
+   * [RU] Валидация базы данных при старте
+   * [EN] Database validation at startup
+   */
+  async validateDatabase() {
+    try {
+      const db = this.database.getDatabase();
+      
+      // Проверяем существование ключевых таблиц
+      const requiredTables = ['users', 'admin_messages', 'scheduled_messages', 'delivery_logs', 'user_responses'];
+      
+      for (const tableName of requiredTables) {
+        const table = db.prepare(`
+          SELECT name FROM sqlite_master 
+          WHERE type='table' AND name=?
+        `).get(tableName);
+        
+        if (!table) {
+          throw new Error(`Таблица ${tableName} не найдена`);
+        }
+        
+        console.log(`✅ Таблица ${tableName} проверена`);
+      }
+      
+      // Проверяем структуру таблицы admin_messages
+      const adminMessageColumns = db.prepare(`PRAGMA table_info(admin_messages)`).all();
+      const requiredColumns = [
+        'id', 'message_text', 'message_type', 'sent_by', 'sent_at',
+        'total_recipients', 'delivered_count', 'failed_count', 'blocked_count'
+      ];
+      
+      const existingColumns = adminMessageColumns.map(col => col.name);
+      for (const columnName of requiredColumns) {
+        if (!existingColumns.includes(columnName)) {
+          throw new Error(`Колонка ${columnName} отсутствует в таблице admin_messages`);
+        }
+      }
+      
+      console.log('✅ Структура таблицы admin_messages корректна');
+      
+      return { success: true };
+    } catch (error) {
+      console.error('❌ Ошибка валидации базы данных:', error.message);
+      throw error;
     }
   }
 
@@ -154,6 +206,11 @@ class TelegramBot {
     // Команда /stats (для администратора)
     this.bot.command('stats', async (ctx) => {
       await this.router.handleStats(ctx);
+    });
+
+    // Команда /admin_message (для администратора)
+    this.bot.command('admin_message', async (ctx) => {
+      await this.router.handleAdminMessage(ctx, this.bot);
     });
 
     // Обработка callback queries (нажатия кнопок)

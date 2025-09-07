@@ -263,6 +263,127 @@ function generateId(length = 8) {
   return result;
 }
 
+/**
+ * [RU] Форматирование сообщения с полезной информацией
+ * [EN] Format useful information message
+ */
+function formatUsefulInfoMessage(usefulInfo) {
+  if (!Array.isArray(usefulInfo) || usefulInfo.length === 0) {
+    return '📋 <b>Полезная информация</b>\n\nИнформация временно недоступна.';
+  }
+
+  let message = '📋 <b>Полезная информация</b>\n\n';
+  
+  usefulInfo.forEach((info, index) => {
+    message += `💡 ${info}`;
+    if (index < usefulInfo.length - 1) {
+      message += '\n\n';
+    }
+  });
+  
+  return message;
+}
+
+/**
+ * [RU] Форматирование сообщения с деталями события
+ * [EN] Format event details message
+ */
+function formatEventDetailsMessage(eventDetails) {
+  if (!eventDetails || typeof eventDetails !== 'object') {
+    return '📅 <b>Детали события</b>\n\nИнформация временно недоступна.';
+  }
+
+  let message = '📅 <b>Детали события</b>\n\n';
+  
+  if (eventDetails.name) {
+    message += `🎉 <b>Название:</b> ${eventDetails.name}\n`;
+  }
+  
+  if (eventDetails.date) {
+    message += `📅 <b>Дата:</b> ${eventDetails.date}\n`;
+  }
+  
+  if (eventDetails.time) {
+    message += `⏰ <b>Время:</b> ${eventDetails.time}\n`;
+  }
+  
+  if (eventDetails.location) {
+    message += `📍 <b>Место:</b> ${eventDetails.location}\n`;
+  }
+  
+  if (eventDetails.address) {
+    message += `🗺️ <b>Адрес:</b> ${eventDetails.address}\n`;
+  }
+  
+  if (eventDetails.dressCode) {
+    message += `👗 <b>Дресс-код:</b> ${eventDetails.dressCode}\n`;
+  }
+  
+  if (eventDetails.contact) {
+    message += `📞 <b>Контакты:</b> ${eventDetails.contact}\n`;
+  }
+  
+  if (eventDetails.description) {
+    message += `\n📝 <b>Описание:</b>\n${eventDetails.description}`;
+  }
+  
+  if (eventDetails.specialInstructions) {
+    message += `\n\n⚠️ <b>Особые указания:</b>\n${eventDetails.specialInstructions}`;
+  }
+  
+  return message;
+}
+
+/**
+ * [RU] Форматирование статистики доставки для админской рассылки
+ * [EN] Format delivery statistics for admin broadcast
+ */
+function formatEnhancedDeliveryStats(stats) {
+  if (!stats) return 'Статистика недоступна';
+  
+  let message = '📊 <b>Статистика улучшенной рассылки</b>\n\n';
+  
+  if (stats.total !== undefined) {
+    message += `👥 <b>Всего пользователей:</b> ${formatNumber(stats.total)}\n`;
+  }
+  
+  if (stats.eligibleForEnhanced !== undefined) {
+    message += `✅ <b>Подходящих для улучшенной рассылки:</b> ${formatNumber(stats.eligibleForEnhanced)}\n`;
+  }
+  
+  if (stats.enhancedSequenceCompleted !== undefined) {
+    message += `🎯 <b>Полная последовательность завершена:</b> ${formatNumber(stats.enhancedSequenceCompleted)}\n`;
+  }
+  
+  if (stats.standardDelivered !== undefined) {
+    message += `📨 <b>Стандартная доставка:</b> ${formatNumber(stats.standardDelivered)}\n`;
+  }
+  
+  if (stats.usefulInfoDelivered !== undefined) {
+    message += `💡 <b>Полезная информация доставлена:</b> ${formatNumber(stats.usefulInfoDelivered)}\n`;
+  }
+  
+  if (stats.eventDetailsDelivered !== undefined) {
+    message += `📅 <b>Детали события доставлены:</b> ${formatNumber(stats.eventDetailsDelivered)}\n`;
+  }
+  
+  if (stats.menuTriggered !== undefined) {
+    message += `🔄 <b>Меню активировано:</b> ${formatNumber(stats.menuTriggered)}\n`;
+  }
+  
+  if (stats.sequenceFailures !== undefined && stats.sequenceFailures > 0) {
+    message += `❌ <b>Ошибки последовательности:</b> ${formatNumber(stats.sequenceFailures)}\n`;
+  }
+  
+  // Добавляем процент успешности
+  if (stats.eligibleForEnhanced && stats.enhancedSequenceCompleted !== undefined) {
+    const successRate = formatPercentage(stats.enhancedSequenceCompleted, stats.eligibleForEnhanced);
+    message += `\n📈 <b>Успешность улучшенной рассылки:</b> ${successRate}`;
+  }
+  
+  return message;
+}
+
 module.exports = {
   formatUserName,
   truncateText,
@@ -279,5 +400,8 @@ module.exports = {
   createHeader,
   formatJSON,
   maskSensitive,
-  generateId
+  generateId,
+  formatUsefulInfoMessage,
+  formatEventDetailsMessage,
+  formatEnhancedDeliveryStats
 };

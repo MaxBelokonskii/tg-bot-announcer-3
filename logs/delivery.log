@@ -1,0 +1,183 @@
+{"count":3,"level":"info","message":"Retrieved active users for delivery","service":"message-delivery","timestamp":"2025-09-07T15:49:09.446Z"}
+{"count":3,"level":"info","message":"Retrieved active users for delivery","service":"message-delivery","timestamp":"2025-09-07T15:49:09.448Z"}
+{"batchSize":25,"level":"info","message":"Starting message broadcast","messageId":"admin_test_1757260149446","service":"message-delivery","timestamp":"2025-09-07T15:49:09.448Z","totalUsers":3}
+{"error":"FOREIGN KEY constraint failed","level":"error","message":"Error logging delivery","messageId":"admin_test_1757260149446","service":"message-delivery","status":"delivered","timestamp":"2025-09-07T15:49:09.474Z","userId":"111111111"}
+{"level":"info","message":"Message delivered successfully","messageId":"admin_test_1757260149446","messageLength":61,"service":"message-delivery","timestamp":"2025-09-07T15:49:09.474Z","userId":"111111111"}
+{"error":"FOREIGN KEY constraint failed","level":"error","message":"Error logging delivery","messageId":"admin_test_1757260149446","service":"message-delivery","status":"delivered","timestamp":"2025-09-07T15:49:09.609Z","userId":"222222222"}
+{"level":"info","message":"Message delivered successfully","messageId":"admin_test_1757260149446","messageLength":61,"service":"message-delivery","timestamp":"2025-09-07T15:49:09.609Z","userId":"222222222"}
+{"error":"FOREIGN KEY constraint failed","level":"error","message":"Error logging delivery","messageId":"admin_test_1757260149446","service":"message-delivery","status":"delivered","timestamp":"2025-09-07T15:49:09.618Z","userId":"333333333"}
+{"level":"info","message":"Message delivered successfully","messageId":"admin_test_1757260149446","messageLength":61,"service":"message-delivery","timestamp":"2025-09-07T15:49:09.619Z","userId":"333333333"}
+{"level":"info","message":"Message broadcast completed","messageId":"admin_test_1757260149446","results":{"blocked":0,"delivered":3,"errors":[],"failed":0,"total":3},"service":"message-delivery","timestamp":"2025-09-07T15:49:09.619Z"}
+{"count":0,"level":"info","message":"Retrieved active users for delivery","service":"message-delivery","timestamp":"2025-09-07T15:49:09.643Z"}
+{"count":1,"level":"info","message":"Retrieved active users for delivery","service":"message-delivery","timestamp":"2025-09-07T15:49:09.663Z"}
+{"count":1,"level":"info","message":"Retrieved active users for delivery","service":"message-delivery","timestamp":"2025-09-07T15:49:09.663Z"}
+{"batchSize":25,"level":"info","message":"Starting message broadcast","messageId":"admin_test_1757260149663","service":"message-delivery","timestamp":"2025-09-07T15:49:09.663Z","totalUsers":1}
+{"error":"FOREIGN KEY constraint failed","level":"error","message":"Error logging delivery","messageId":"admin_test_1757260149663","service":"message-delivery","status":"delivered","timestamp":"2025-09-07T15:49:09.668Z","userId":"111111111"}
+{"level":"info","message":"Message delivered successfully","messageId":"admin_test_1757260149663","messageLength":61,"service":"message-delivery","timestamp":"2025-09-07T15:49:09.669Z","userId":"111111111"}
+{"level":"info","message":"Message broadcast completed","messageId":"admin_test_1757260149663","results":{"blocked":0,"delivered":1,"errors":[],"failed":0,"total":1},"service":"message-delivery","timestamp":"2025-09-07T15:49:09.669Z"}
+{"error":"The database connection is not open","level":"error","message":"Error retrieving active users","service":"message-delivery","timestamp":"2025-09-07T15:49:09.719Z"}
+{"count":1,"level":"info","message":"Retrieved active users for delivery","service":"message-delivery","timestamp":"2025-09-07T15:49:09.727Z"}
+{"count":1,"level":"info","message":"Retrieved active users for delivery","service":"message-delivery","timestamp":"2025-09-07T15:49:09.727Z"}
+{"batchSize":25,"level":"info","message":"Starting message broadcast","messageId":"admin_test_1757260149727","service":"message-delivery","timestamp":"2025-09-07T15:49:09.727Z","totalUsers":1}
+{"error":"FOREIGN KEY constraint failed","level":"error","message":"Error logging delivery","messageId":"admin_test_1757260149727","service":"message-delivery","status":"failed","timestamp":"2025-09-07T15:49:09.730Z","userId":"111111111"}
+{"error":"Telegram API Error","level":"error","message":"Message delivery failed","messageId":"admin_test_1757260149727","service":"message-delivery","timestamp":"2025-09-07T15:49:09.730Z","userId":"111111111"}
+{"level":"info","message":"Message broadcast completed","messageId":"admin_test_1757260149727","results":{"blocked":0,"delivered":0,"errors":[{"error":"Telegram API Error","userId":"111111111"}],"failed":1,"total":1},"service":"message-delivery","timestamp":"2025-09-07T15:49:09.730Z"}
+{"count":3,"level":"info","message":"Retrieved active users for delivery","service":"message-delivery","timestamp":"2025-09-07T15:50:12.400Z"}
+{"count":3,"level":"info","message":"Retrieved active users for delivery","service":"message-delivery","timestamp":"2025-09-07T15:50:12.402Z"}
+{"batchSize":25,"level":"info","message":"Starting message broadcast","messageId":null,"service":"message-delivery","timestamp":"2025-09-07T15:50:12.403Z","totalUsers":3}
+{"level":"info","message":"Message delivered successfully","messageId":null,"messageLength":61,"service":"message-delivery","timestamp":"2025-09-07T15:50:12.403Z","userId":"111111111"}
+{"level":"info","message":"Message delivered successfully","messageId":null,"messageLength":61,"service":"message-delivery","timestamp":"2025-09-07T15:50:12.553Z","userId":"222222222"}
+{"level":"info","message":"Message delivered successfully","messageId":null,"messageLength":61,"service":"message-delivery","timestamp":"2025-09-07T15:50:12.554Z","userId":"333333333"}
+{"level":"info","message":"Message broadcast completed","messageId":null,"results":{"blocked":0,"delivered":3,"errors":[],"failed":0,"total":3},"service":"message-delivery","timestamp":"2025-09-07T15:50:12.554Z"}
+{"count":0,"level":"info","message":"Retrieved active users for delivery","service":"message-delivery","timestamp":"2025-09-07T15:50:12.597Z"}
+{"count":1,"level":"info","message":"Retrieved active users for delivery","service":"message-delivery","timestamp":"2025-09-07T15:50:12.619Z"}
+{"count":1,"level":"info","message":"Retrieved active users for delivery","service":"message-delivery","timestamp":"2025-09-07T15:50:12.620Z"}
+{"batchSize":25,"level":"info","message":"Starting message broadcast","messageId":null,"service":"message-delivery","timestamp":"2025-09-07T15:50:12.620Z","totalUsers":1}
+{"level":"info","message":"Message delivered successfully","messageId":null,"messageLength":61,"service":"message-delivery","timestamp":"2025-09-07T15:50:12.620Z","userId":"111111111"}
+{"level":"info","message":"Message broadcast completed","messageId":null,"results":{"blocked":0,"delivered":1,"errors":[],"failed":0,"total":1},"service":"message-delivery","timestamp":"2025-09-07T15:50:12.620Z"}
+{"error":"The database connection is not open","level":"error","message":"Error retrieving active users","service":"message-delivery","timestamp":"2025-09-07T15:50:12.703Z"}
+{"count":1,"level":"info","message":"Retrieved active users for delivery","service":"message-delivery","timestamp":"2025-09-07T15:50:12.714Z"}
+{"count":1,"level":"info","message":"Retrieved active users for delivery","service":"message-delivery","timestamp":"2025-09-07T15:50:12.715Z"}
+{"batchSize":25,"level":"info","message":"Starting message broadcast","messageId":null,"service":"message-delivery","timestamp":"2025-09-07T15:50:12.715Z","totalUsers":1}
+{"error":"Telegram API Error","level":"error","message":"Message delivery failed","messageId":null,"service":"message-delivery","timestamp":"2025-09-07T15:50:12.715Z","userId":"111111111"}
+{"level":"info","message":"Message broadcast completed","messageId":null,"results":{"blocked":0,"delivered":0,"errors":[{"error":"Telegram API Error","userId":"111111111"}],"failed":1,"total":1},"service":"message-delivery","timestamp":"2025-09-07T15:50:12.715Z"}
+{"count":3,"level":"info","message":"Retrieved active users for delivery","service":"message-delivery","timestamp":"2025-09-07T15:50:41.416Z"}
+{"count":3,"level":"info","message":"Retrieved active users for delivery","service":"message-delivery","timestamp":"2025-09-07T15:50:41.418Z"}
+{"batchSize":25,"level":"info","message":"Starting message broadcast","messageId":null,"service":"message-delivery","timestamp":"2025-09-07T15:50:41.418Z","totalUsers":3}
+{"level":"info","message":"Message delivered successfully","messageId":null,"messageLength":61,"service":"message-delivery","timestamp":"2025-09-07T15:50:41.418Z","userId":"111111111"}
+{"level":"info","message":"Message delivered successfully","messageId":null,"messageLength":61,"service":"message-delivery","timestamp":"2025-09-07T15:50:41.570Z","userId":"222222222"}
+{"level":"info","message":"Message delivered successfully","messageId":null,"messageLength":61,"service":"message-delivery","timestamp":"2025-09-07T15:50:41.570Z","userId":"333333333"}
+{"level":"info","message":"Message broadcast completed","messageId":null,"results":{"blocked":0,"delivered":3,"errors":[],"failed":0,"total":3},"service":"message-delivery","timestamp":"2025-09-07T15:50:41.571Z"}
+{"count":0,"level":"info","message":"Retrieved active users for delivery","service":"message-delivery","timestamp":"2025-09-07T15:50:41.623Z"}
+{"count":1,"level":"info","message":"Retrieved active users for delivery","service":"message-delivery","timestamp":"2025-09-07T15:50:41.648Z"}
+{"count":1,"level":"info","message":"Retrieved active users for delivery","service":"message-delivery","timestamp":"2025-09-07T15:50:41.648Z"}
+{"batchSize":25,"level":"info","message":"Starting message broadcast","messageId":null,"service":"message-delivery","timestamp":"2025-09-07T15:50:41.648Z","totalUsers":1}
+{"level":"info","message":"Message delivered successfully","messageId":null,"messageLength":61,"service":"message-delivery","timestamp":"2025-09-07T15:50:41.648Z","userId":"111111111"}
+{"level":"info","message":"Message broadcast completed","messageId":null,"results":{"blocked":0,"delivered":1,"errors":[],"failed":0,"total":1},"service":"message-delivery","timestamp":"2025-09-07T15:50:41.649Z"}
+{"error":"The database connection is not open","level":"error","message":"Error retrieving active users","service":"message-delivery","timestamp":"2025-09-07T15:50:41.714Z"}
+{"count":1,"level":"info","message":"Retrieved active users for delivery","service":"message-delivery","timestamp":"2025-09-07T15:50:41.725Z"}
+{"count":1,"level":"info","message":"Retrieved active users for delivery","service":"message-delivery","timestamp":"2025-09-07T15:50:41.725Z"}
+{"batchSize":25,"level":"info","message":"Starting message broadcast","messageId":null,"service":"message-delivery","timestamp":"2025-09-07T15:50:41.725Z","totalUsers":1}
+{"error":"Telegram API Error","level":"error","message":"Message delivery failed","messageId":null,"service":"message-delivery","timestamp":"2025-09-07T15:50:41.726Z","userId":"111111111"}
+{"level":"info","message":"Message broadcast completed","messageId":null,"results":{"blocked":0,"delivered":0,"errors":[{"error":"Telegram API Error","userId":"111111111"}],"failed":1,"total":1},"service":"message-delivery","timestamp":"2025-09-07T15:50:41.726Z"}
+{"count":3,"level":"info","message":"Retrieved active users for delivery","service":"message-delivery","timestamp":"2025-09-07T15:51:02.364Z"}
+{"count":3,"level":"info","message":"Retrieved active users for delivery","service":"message-delivery","timestamp":"2025-09-07T15:51:02.366Z"}
+{"batchSize":25,"level":"info","message":"Starting message broadcast","messageId":null,"service":"message-delivery","timestamp":"2025-09-07T15:51:02.366Z","totalUsers":3}
+{"level":"info","message":"Message delivered successfully","messageId":null,"messageLength":61,"service":"message-delivery","timestamp":"2025-09-07T15:51:02.367Z","userId":"111111111"}
+{"level":"info","message":"Message delivered successfully","messageId":null,"messageLength":61,"service":"message-delivery","timestamp":"2025-09-07T15:51:02.518Z","userId":"222222222"}
+{"level":"info","message":"Message delivered successfully","messageId":null,"messageLength":61,"service":"message-delivery","timestamp":"2025-09-07T15:51:02.519Z","userId":"333333333"}
+{"level":"info","message":"Message broadcast completed","messageId":null,"results":{"blocked":0,"delivered":3,"errors":[],"failed":0,"total":3},"service":"message-delivery","timestamp":"2025-09-07T15:51:02.519Z"}
+{"count":0,"level":"info","message":"Retrieved active users for delivery","service":"message-delivery","timestamp":"2025-09-07T15:51:02.531Z"}
+{"count":1,"level":"info","message":"Retrieved active users for delivery","service":"message-delivery","timestamp":"2025-09-07T15:51:02.554Z"}
+{"count":1,"level":"info","message":"Retrieved active users for delivery","service":"message-delivery","timestamp":"2025-09-07T15:51:02.554Z"}
+{"batchSize":25,"level":"info","message":"Starting message broadcast","messageId":null,"service":"message-delivery","timestamp":"2025-09-07T15:51:02.554Z","totalUsers":1}
+{"level":"info","message":"Message delivered successfully","messageId":null,"messageLength":61,"service":"message-delivery","timestamp":"2025-09-07T15:51:02.555Z","userId":"111111111"}
+{"level":"info","message":"Message broadcast completed","messageId":null,"results":{"blocked":0,"delivered":1,"errors":[],"failed":0,"total":1},"service":"message-delivery","timestamp":"2025-09-07T15:51:02.555Z"}
+{"error":"The database connection is not open","level":"error","message":"Error retrieving active users","service":"message-delivery","timestamp":"2025-09-07T15:51:02.624Z"}
+{"count":1,"level":"info","message":"Retrieved active users for delivery","service":"message-delivery","timestamp":"2025-09-07T15:51:02.637Z"}
+{"count":1,"level":"info","message":"Retrieved active users for delivery","service":"message-delivery","timestamp":"2025-09-07T15:51:02.637Z"}
+{"batchSize":25,"level":"info","message":"Starting message broadcast","messageId":null,"service":"message-delivery","timestamp":"2025-09-07T15:51:02.637Z","totalUsers":1}
+{"error":"Telegram API Error","level":"error","message":"Message delivery failed","messageId":null,"service":"message-delivery","timestamp":"2025-09-07T15:51:02.637Z","userId":"111111111"}
+{"level":"info","message":"Message broadcast completed","messageId":null,"results":{"blocked":0,"delivered":0,"errors":[{"error":"Telegram API Error","userId":"111111111"}],"failed":1,"total":1},"service":"message-delivery","timestamp":"2025-09-07T15:51:02.638Z"}
+{"count":2,"level":"info","message":"Retrieved active users for delivery","service":"message-delivery","timestamp":"2025-09-07T17:00:40.189Z"}
+{"count":2,"level":"info","message":"Retrieved active users for delivery","service":"message-delivery","timestamp":"2025-09-07T17:00:40.190Z"}
+{"batchSize":25,"level":"info","message":"Starting message broadcast","messageId":null,"service":"message-delivery","timestamp":"2025-09-07T17:00:40.191Z","totalUsers":2}
+{"error":"Cannot read properties of undefined (reading 'sendMessage')","level":"error","message":"Message delivery failed","messageId":null,"service":"message-delivery","timestamp":"2025-09-07T17:00:40.194Z","userId":"385422190"}
+{"error":"Cannot read properties of undefined (reading 'sendMessage')","level":"error","message":"Message delivery failed","messageId":null,"service":"message-delivery","timestamp":"2025-09-07T17:00:40.347Z","userId":"339828401"}
+{"level":"info","message":"Message broadcast completed","messageId":null,"results":{"blocked":0,"delivered":0,"errors":[{"error":"Cannot read properties of undefined (reading 'sendMessage')","userId":"385422190"},{"error":"Cannot read properties of undefined (reading 'sendMessage')","userId":"339828401"}],"failed":2,"total":2},"service":"message-delivery","timestamp":"2025-09-07T17:00:40.348Z"}
+{"botId":123456789,"botName":"Test Bot","botUsername":"test_diagnostic_bot","level":"info","message":"Bot token validation successful","service":"message-delivery","timestamp":"2025-09-07T17:10:23.941Z"}
+{"count":0,"level":"info","message":"Retrieved active users for delivery","service":"message-delivery","timestamp":"2025-09-07T17:10:23.943Z"}
+{"botId":123456789,"botName":"Test Bot","botUsername":"test_bot","level":"info","message":"Bot token validation successful","service":"message-delivery","timestamp":"2025-09-07T17:12:48.367Z"}
+{"error":"Invalid token","level":"error","message":"Bot token validation failed","service":"message-delivery","timestamp":"2025-09-07T17:12:48.370Z"}
+{"isAdmin":true,"level":"info","message":"Message delivered successfully","messageId":"admin_test_123","messageLength":28,"service":"message-delivery","timestamp":"2025-09-07T17:12:48.372Z","userId":"12345"}
+{"isAdmin":false,"level":"info","message":"Message delivered successfully","messageId":1,"messageLength":17,"service":"message-delivery","timestamp":"2025-09-07T17:12:48.374Z","userId":"12345"}
+{"error":"Forbidden: bot was blocked by the user","errorStatus":"blocked","isAdmin":true,"level":"error","message":"Message delivery failed","messageId":"admin_test_123","service":"message-delivery","timestamp":"2025-09-07T17:12:48.375Z","userId":"12345"}
+{"botId":123456789,"botName":"Test Bot","botUsername":"test_bot","level":"info","message":"Bot token validation successful","service":"message-delivery","timestamp":"2025-09-07T17:12:48.377Z"}
+{"count":3,"level":"info","message":"Retrieved active users for delivery","service":"message-delivery","timestamp":"2025-09-07T17:12:48.377Z"}
+{"count":3,"level":"info","message":"Retrieved active users for delivery","service":"message-delivery","timestamp":"2025-09-07T17:12:48.378Z"}
+{"batchSize":25,"level":"info","message":"Starting message broadcast","messageId":"admin_test_1757265168377","service":"message-delivery","timestamp":"2025-09-07T17:12:48.378Z","totalUsers":3}
+{"isAdmin":true,"level":"info","message":"Message delivered successfully","messageId":"admin_test_1757265168377","messageLength":61,"service":"message-delivery","timestamp":"2025-09-07T17:12:48.378Z","userId":"12345"}
+{"isAdmin":true,"level":"info","message":"Message delivered successfully","messageId":"admin_test_1757265168377","messageLength":61,"service":"message-delivery","timestamp":"2025-09-07T17:12:48.528Z","userId":"67890"}
+{"isAdmin":true,"level":"info","message":"Message delivered successfully","messageId":"admin_test_1757265168377","messageLength":61,"service":"message-delivery","timestamp":"2025-09-07T17:12:48.528Z","userId":"54321"}
+{"level":"info","message":"Message broadcast completed","messageId":"admin_test_1757265168377","results":{"blocked":0,"delivered":3,"errors":[],"failed":0,"total":3},"service":"message-delivery","timestamp":"2025-09-07T17:12:48.529Z"}
+{"botId":123456789,"botName":"Test Bot","botUsername":"test_bot","level":"info","message":"Bot token validation successful","service":"message-delivery","timestamp":"2025-09-07T17:12:48.533Z"}
+{"count":3,"level":"info","message":"Retrieved active users for delivery","service":"message-delivery","timestamp":"2025-09-07T17:12:48.533Z"}
+{"count":3,"level":"info","message":"Retrieved active users for delivery","service":"message-delivery","timestamp":"2025-09-07T17:12:48.533Z"}
+{"batchSize":25,"level":"info","message":"Starting message broadcast","messageId":"admin_test_1757265168532","service":"message-delivery","timestamp":"2025-09-07T17:12:48.533Z","totalUsers":3}
+{"isAdmin":true,"level":"info","message":"Message delivered successfully","messageId":"admin_test_1757265168532","messageLength":61,"service":"message-delivery","timestamp":"2025-09-07T17:12:48.533Z","userId":"12345"}
+{"isAdmin":true,"level":"info","message":"Message delivered successfully","messageId":"admin_test_1757265168532","messageLength":61,"service":"message-delivery","timestamp":"2025-09-07T17:12:48.684Z","userId":"67890"}
+{"error":"Forbidden: bot was blocked by the user","errorStatus":"blocked","isAdmin":true,"level":"error","message":"Message delivery failed","messageId":"admin_test_1757265168532","service":"message-delivery","timestamp":"2025-09-07T17:12:48.685Z","userId":"54321"}
+{"level":"info","message":"Message broadcast completed","messageId":"admin_test_1757265168532","results":{"blocked":1,"delivered":2,"errors":[{"error":"Forbidden: bot was blocked by the user","status":"blocked","userId":"54321"}],"failed":1,"total":3},"service":"message-delivery","timestamp":"2025-09-07T17:12:48.686Z"}
+{"error":"Invalid token","level":"error","message":"Bot token validation failed","service":"message-delivery","timestamp":"2025-09-07T17:12:48.692Z"}
+{"botId":123456789,"botName":"Test Bot","botUsername":"test_bot","level":"info","message":"Bot token validation successful","service":"message-delivery","timestamp":"2025-09-07T17:12:48.731Z"}
+{"count":0,"level":"info","message":"Retrieved active users for delivery","service":"message-delivery","timestamp":"2025-09-07T17:12:48.731Z"}
+{"isAdmin":true,"level":"info","message":"Message delivered successfully","messageId":"admin_diagnostic","messageLength":16,"service":"message-delivery","timestamp":"2025-09-07T17:12:48.733Z","userId":"admin123"}
+{"adminId":"admin123","level":"info","message":"Diagnostic message sent","result":{"status":"delivered","success":true,"userId":"admin123"},"service":"message-delivery","timestamp":"2025-09-07T17:12:48.733Z"}
+{"botId":123456789,"botName":"Test Bot","botUsername":"test_diagnostic_bot","level":"info","message":"Bot token validation successful","service":"message-delivery","timestamp":"2025-09-07T17:13:02.151Z"}
+{"count":0,"level":"info","message":"Retrieved active users for delivery","service":"message-delivery","timestamp":"2025-09-07T17:13:02.154Z"}
+{"error":"Cannot read properties of undefined (reading 'getMe')","level":"error","message":"Bot token validation failed","service":"message-delivery","timestamp":"2025-09-07T17:16:24.674Z"}
+{"botId":123456789,"botName":"Test Bot","botUsername":"test_bot","level":"info","message":"Bot token validation successful","service":"message-delivery","timestamp":"2025-09-07T18:07:55.500Z"}
+{"error":"Invalid token","level":"error","message":"Bot token validation failed","service":"message-delivery","timestamp":"2025-09-07T18:07:55.502Z"}
+{"isAdmin":true,"level":"info","message":"Message delivered successfully","messageId":"admin_test_123","messageLength":28,"service":"message-delivery","timestamp":"2025-09-07T18:07:55.504Z","userId":"12345"}
+{"isAdmin":false,"level":"info","message":"Message delivered successfully","messageId":1,"messageLength":17,"service":"message-delivery","timestamp":"2025-09-07T18:07:55.506Z","userId":"12345"}
+{"error":"Forbidden: bot was blocked by the user","errorStatus":"blocked","isAdmin":true,"level":"error","message":"Message delivery failed","messageId":"admin_test_123","service":"message-delivery","timestamp":"2025-09-07T18:07:55.507Z","userId":"12345"}
+{"botId":123456789,"botName":"Test Bot","botUsername":"test_bot","level":"info","message":"Bot token validation successful","service":"message-delivery","timestamp":"2025-09-07T18:07:55.508Z"}
+{"count":3,"level":"info","message":"Retrieved active users for delivery","service":"message-delivery","timestamp":"2025-09-07T18:07:55.508Z"}
+{"count":3,"level":"info","message":"Retrieved active users for delivery","service":"message-delivery","timestamp":"2025-09-07T18:07:55.509Z"}
+{"batchSize":25,"level":"info","message":"Starting message broadcast","messageId":"admin_test_1757268475508","service":"message-delivery","timestamp":"2025-09-07T18:07:55.509Z","totalUsers":3}
+{"isAdmin":true,"level":"info","message":"Message delivered successfully","messageId":"admin_test_1757268475508","messageLength":61,"service":"message-delivery","timestamp":"2025-09-07T18:07:55.509Z","userId":"12345"}
+{"isAdmin":true,"level":"info","message":"Message delivered successfully","messageId":"admin_test_1757268475508","messageLength":61,"service":"message-delivery","timestamp":"2025-09-07T18:07:55.660Z","userId":"67890"}
+{"isAdmin":true,"level":"info","message":"Message delivered successfully","messageId":"admin_test_1757268475508","messageLength":61,"service":"message-delivery","timestamp":"2025-09-07T18:07:55.660Z","userId":"54321"}
+{"level":"info","message":"Message broadcast completed","messageId":"admin_test_1757268475508","results":{"blocked":0,"delivered":3,"errors":[],"failed":0,"total":3},"service":"message-delivery","timestamp":"2025-09-07T18:07:55.661Z"}
+{"botId":123456789,"botName":"Test Bot","botUsername":"test_bot","level":"info","message":"Bot token validation successful","service":"message-delivery","timestamp":"2025-09-07T18:07:55.666Z"}
+{"count":3,"level":"info","message":"Retrieved active users for delivery","service":"message-delivery","timestamp":"2025-09-07T18:07:55.666Z"}
+{"count":3,"level":"info","message":"Retrieved active users for delivery","service":"message-delivery","timestamp":"2025-09-07T18:07:55.666Z"}
+{"batchSize":25,"level":"info","message":"Starting message broadcast","messageId":"admin_test_1757268475666","service":"message-delivery","timestamp":"2025-09-07T18:07:55.666Z","totalUsers":3}
+{"isAdmin":true,"level":"info","message":"Message delivered successfully","messageId":"admin_test_1757268475666","messageLength":61,"service":"message-delivery","timestamp":"2025-09-07T18:07:55.667Z","userId":"12345"}
+{"isAdmin":true,"level":"info","message":"Message delivered successfully","messageId":"admin_test_1757268475666","messageLength":61,"service":"message-delivery","timestamp":"2025-09-07T18:07:55.817Z","userId":"67890"}
+{"error":"Forbidden: bot was blocked by the user","errorStatus":"blocked","isAdmin":true,"level":"error","message":"Message delivery failed","messageId":"admin_test_1757268475666","service":"message-delivery","timestamp":"2025-09-07T18:07:55.819Z","userId":"54321"}
+{"level":"info","message":"Message broadcast completed","messageId":"admin_test_1757268475666","results":{"blocked":1,"delivered":2,"errors":[{"error":"Forbidden: bot was blocked by the user","status":"blocked","userId":"54321"}],"failed":1,"total":3},"service":"message-delivery","timestamp":"2025-09-07T18:07:55.819Z"}
+{"error":"Invalid token","level":"error","message":"Bot token validation failed","service":"message-delivery","timestamp":"2025-09-07T18:07:55.824Z"}
+{"botId":123456789,"botName":"Test Bot","botUsername":"test_bot","level":"info","message":"Bot token validation successful","service":"message-delivery","timestamp":"2025-09-07T18:07:55.859Z"}
+{"count":0,"level":"info","message":"Retrieved active users for delivery","service":"message-delivery","timestamp":"2025-09-07T18:07:55.859Z"}
+{"isAdmin":true,"level":"info","message":"Message delivered successfully","messageId":"admin_diagnostic","messageLength":16,"service":"message-delivery","timestamp":"2025-09-07T18:07:55.861Z","userId":"admin123"}
+{"adminId":"admin123","level":"info","message":"Diagnostic message sent","result":{"status":"delivered","success":true,"userId":"admin123"},"service":"message-delivery","timestamp":"2025-09-07T18:07:55.861Z"}
+{"botId":123456789,"botName":"Test Bot","botUsername":"test_diagnostic_bot","level":"info","message":"Bot token validation successful","service":"message-delivery","timestamp":"2025-09-07T18:43:06.575Z"}
+{"count":0,"level":"info","message":"Retrieved active users for delivery","service":"message-delivery","timestamp":"2025-09-07T18:43:06.583Z"}
+{"error":"bot.telegram.getMe is not a function","level":"error","message":"Bot token validation failed","service":"message-delivery","timestamp":"2025-09-07T18:49:30.919Z"}
+{"botId":123456789,"botName":"Test Bot","botUsername":"test_bot","level":"info","message":"Bot token validation successful","service":"message-delivery","timestamp":"2025-09-07T18:50:12.891Z"}
+{"count":3,"level":"info","message":"Retrieved active users for delivery","service":"message-delivery","timestamp":"2025-09-07T18:50:12.893Z"}
+{"count":3,"level":"info","message":"Retrieved active users for delivery","service":"message-delivery","timestamp":"2025-09-07T18:50:12.893Z"}
+{"batchSize":25,"level":"info","message":"Starting message broadcast","messageId":"admin_test_1757271012891","service":"message-delivery","timestamp":"2025-09-07T18:50:12.893Z","totalUsers":3}
+{"isAdmin":true,"level":"info","message":"Message delivered successfully","messageId":"admin_test_1757271012891","messageLength":61,"service":"message-delivery","timestamp":"2025-09-07T18:50:12.894Z","userId":"111111111"}
+{"error":"Forbidden: bot was blocked by the user","errorCode":403,"errorStatus":"blocked","isAdmin":true,"level":"error","message":"Message delivery failed","messageId":"admin_test_1757271012891","service":"message-delivery","timestamp":"2025-09-07T18:50:13.045Z","userId":"222222222"}
+{"error":"Forbidden: bot was blocked by the user","errorCode":403,"errorStatus":"blocked","isAdmin":true,"level":"error","message":"Message delivery failed","messageId":"admin_test_1757271012891","service":"message-delivery","timestamp":"2025-09-07T18:50:13.045Z","userId":"333333333"}
+{"level":"info","message":"Message broadcast completed","messageId":"admin_test_1757271012891","results":{"blocked":2,"delivered":1,"errors":[{"error":"Forbidden: bot was blocked by the user","status":"blocked","userId":"222222222"},{"error":"Forbidden: bot was blocked by the user","status":"blocked","userId":"333333333"}],"failed":2,"total":3},"service":"message-delivery","timestamp":"2025-09-07T18:50:13.046Z"}
+{"botId":123456789,"botName":"Test Bot","botUsername":"test_bot","level":"info","message":"Bot token validation successful","service":"message-delivery","timestamp":"2025-09-07T18:50:13.050Z"}
+{"count":0,"level":"info","message":"Retrieved active users for delivery","service":"message-delivery","timestamp":"2025-09-07T18:50:13.050Z"}
+{"error":"Cannot read properties of undefined (reading 'getMe')","level":"error","message":"Bot token validation failed","service":"message-delivery","timestamp":"2025-09-07T18:54:04.579Z"}
+{"botId":123456789,"botName":"Test Bot","botUsername":"test_bot","level":"info","message":"Bot token validation successful","service":"message-delivery","timestamp":"2025-09-07T18:58:56.176Z"}
+{"botId":123456789,"botName":"Test Bot","botUsername":"test_bot","level":"info","message":"Bot token validation successful","service":"message-delivery","timestamp":"2025-09-07T18:58:56.180Z"}
+{"count":1,"level":"info","message":"Retrieved active users for delivery","service":"message-delivery","timestamp":"2025-09-07T18:58:56.180Z"}
+{"count":1,"level":"info","message":"Retrieved active users for delivery","service":"message-delivery","timestamp":"2025-09-07T18:58:56.181Z"}
+{"batchSize":25,"level":"info","message":"Starting message broadcast","messageId":"admin_test_1757271536180","service":"message-delivery","timestamp":"2025-09-07T18:58:56.181Z","totalUsers":1}
+{"isAdmin":true,"level":"info","message":"Message delivered successfully","messageId":"admin_test_1757271536180","messageLength":61,"service":"message-delivery","timestamp":"2025-09-07T18:58:56.181Z","userId":"test_user_1"}
+{"level":"info","message":"Message broadcast completed","messageId":"admin_test_1757271536180","results":{"blocked":0,"delivered":1,"errors":[],"failed":0,"total":1},"service":"message-delivery","timestamp":"2025-09-07T18:58:56.181Z"}
+{"botId":8244787277,"botName":"Торжество в сентябре","botUsername":"wedding_announcer_bot","level":"info","message":"Bot token validation successful","service":"message-delivery","timestamp":"2025-09-07T19:00:02.709Z"}
+{"count":1,"level":"info","message":"Retrieved active users for delivery","service":"message-delivery","timestamp":"2025-09-07T19:00:02.709Z"}
+{"count":1,"level":"info","message":"Retrieved active users for delivery","service":"message-delivery","timestamp":"2025-09-07T19:00:02.710Z"}
+{"batchSize":25,"level":"info","message":"Starting message broadcast","messageId":"admin_test_1757271602619","service":"message-delivery","timestamp":"2025-09-07T19:00:02.711Z","totalUsers":1}
+{"isAdmin":true,"level":"info","message":"Message delivered successfully","messageId":"admin_test_1757271602619","messageLength":61,"service":"message-delivery","timestamp":"2025-09-07T19:00:02.928Z","userId":"339828401"}
+{"level":"info","message":"Message broadcast completed","messageId":"admin_test_1757271602619","results":{"blocked":0,"delivered":1,"errors":[],"failed":0,"total":1},"service":"message-delivery","timestamp":"2025-09-07T19:00:02.929Z"}
+{"botId":8244787277,"botName":"Торжество в сентябре","botUsername":"wedding_announcer_bot","level":"info","message":"Bot token validation successful","service":"message-delivery","timestamp":"2025-09-07T19:01:31.700Z"}
+{"count":2,"level":"info","message":"Retrieved active users for delivery","service":"message-delivery","timestamp":"2025-09-07T19:01:31.702Z"}
+{"count":2,"level":"info","message":"Retrieved active users for delivery","service":"message-delivery","timestamp":"2025-09-07T19:01:31.703Z"}
+{"batchSize":25,"level":"info","message":"Starting message broadcast","messageId":"admin_test_1757271691594","service":"message-delivery","timestamp":"2025-09-07T19:01:31.703Z","totalUsers":2}
+{"isAdmin":true,"level":"info","message":"Message delivered successfully","messageId":"admin_test_1757271691594","messageLength":61,"service":"message-delivery","timestamp":"2025-09-07T19:01:31.869Z","userId":"385422190"}
+{"isAdmin":true,"level":"info","message":"Message delivered successfully","messageId":"admin_test_1757271691594","messageLength":61,"service":"message-delivery","timestamp":"2025-09-07T19:01:32.474Z","userId":"339828401"}
+{"level":"info","message":"Message broadcast completed","messageId":"admin_test_1757271691594","results":{"blocked":0,"delivered":2,"errors":[],"failed":0,"total":2},"service":"message-delivery","timestamp":"2025-09-07T19:01:32.475Z"}
+{"botId":8244787277,"botName":"Торжество в сентябре","botUsername":"wedding_announcer_bot","level":"info","message":"Bot token validation successful","service":"message-delivery","timestamp":"2025-09-07T20:11:36.713Z"}
+{"count":1,"level":"info","message":"Retrieved active users for delivery","service":"message-delivery","timestamp":"2025-09-07T20:11:36.716Z"}
+{"batchSize":25,"level":"info","message":"Starting message broadcast","messageId":"admin_test_1757275896620","service":"message-delivery","timestamp":"2025-09-07T20:11:36.716Z","totalUsers":1}
+{"isAdmin":true,"level":"info","message":"Message delivered successfully","messageId":"admin_test_1757275896620","messageLength":61,"service":"message-delivery","timestamp":"2025-09-07T20:11:36.854Z","userId":"339828401"}
+{"level":"info","message":"Message broadcast completed","messageId":"admin_test_1757275896620","results":{"blocked":0,"delivered":1,"errors":[],"failed":0,"total":1},"service":"message-delivery","timestamp":"2025-09-07T20:11:36.856Z"}

@@ -6,6 +6,7 @@
 CREATE TABLE IF NOT EXISTS users (
     id INTEGER PRIMARY KEY AUTOINCREMENT,
     telegram_id TEXT UNIQUE NOT NULL,
+    username TEXT,
     full_name TEXT NOT NULL,
     attendance_status TEXT DEFAULT 'attending' CHECK (attendance_status IN ('attending', 'not_attending', 'maybe')),
     attendance_updated_at DATETIME DEFAULT CURRENT_TIMESTAMP,
@@ -44,14 +45,39 @@ CREATE TABLE IF NOT EXISTS delivery_logs (
     FOREIGN KEY (message_id) REFERENCES scheduled_messages(id) ON DELETE CASCADE
 );
 
+-- Таблица админских сообщений
+CREATE TABLE IF NOT EXISTS admin_messages (
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    message_text TEXT NOT NULL,
+    message_type TEXT DEFAULT 'test_message',
+    sent_by TEXT NOT NULL, -- telegram_id администратора
+    sent_at DATETIME DEFAULT CURRENT_TIMESTAMP,
+    total_recipients INTEGER DEFAULT 0,
+    delivered_count INTEGER DEFAULT 0,
+    failed_count INTEGER DEFAULT 0,
+    blocked_count INTEGER DEFAULT 0
+);
+
 -- Индексы для оптимизации запросов
 CREATE INDEX IF NOT EXISTS idx_users_telegram_id ON users(telegram_id);
+CREATE INDEX IF NOT EXISTS idx_users_username ON users(username);
 CREATE INDEX IF NOT EXISTS idx_users_attendance ON users(attendance_status);
+
+-- Специализированные индексы для username-based запросов
+CREATE INDEX IF NOT EXISTS idx_users_username_lookup ON users(username)
+WHERE username IS NOT NULL;
+
+CREATE INDEX IF NOT EXISTS idx_users_username_telegram ON users(username, telegram_id);
+
+CREATE INDEX IF NOT EXISTS idx_users_active_username ON users(username, attendance_status)
+WHERE username IS NOT NULL;
 CREATE INDEX IF NOT EXISTS idx_user_responses_user ON user_responses(user_id);
 CREATE INDEX IF NOT EXISTS idx_scheduled_messages_date ON scheduled_messages(send_date);
 CREATE INDEX IF NOT EXISTS idx_scheduled_messages_status ON scheduled_messages(status);
 CREATE INDEX IF NOT EXISTS idx_delivery_logs_user_message ON delivery_logs(user_id, message_id);
 CREATE INDEX IF NOT EXISTS idx_delivery_logs_status ON delivery_logs(status);
+CREATE INDEX IF NOT EXISTS idx_admin_messages_sent_by ON admin_messages(sent_by);
+CREATE INDEX IF NOT EXISTS idx_admin_messages_type ON admin_messages(message_type);
 
 -- Триггеры для автоматического обновления timestamps
 CREATE TRIGGER IF NOT EXISTS update_users_timestamp 

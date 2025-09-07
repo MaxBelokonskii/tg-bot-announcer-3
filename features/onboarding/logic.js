@@ -31,6 +31,8 @@ class OnboardingLogic {
       logUserAction(ctx, 'start_command', { userExists });
 
       if (userExists) {
+        // Синхронизируем username для существующих пользователей
+        await this.api.syncTelegramUsername(telegramId, ctx.from);
         return await this.handleExistingUser(ctx);
       } else {
         return await this.startOnboarding(ctx);
@@ -63,15 +65,10 @@ class OnboardingLogic {
       name: userResult.full_name
     });
 
-    // Создаем клавиатуру с основными функциями
-    const keyboard = createKeyboard([
-      '📅 Предстоящие события',
-      '💬 Мои ответы',
-      '⚙️ Настройки',
-      '❓ Помощь'
-    ], { columns: 2 });
+    // Убираем создание клавиатуры и добавляем инструкцию
+    const instructionText = welcomeText + '\n\n📋 Используйте команду /menu для доступа к функциям бота.';
 
-    await safeSendMessage(ctx, welcomeText, keyboard, { parseMode: 'HTML' });
+    await safeSendMessage(ctx, instructionText, null, { parseMode: 'HTML' });
     
     logUserAction(ctx, 'existing_user_welcomed', {
       userId: userResult.id,
@@ -132,6 +129,7 @@ class OnboardingLogic {
   async handleNameInput(ctx) {
     const telegramId = ctx.from.id.toString();
     const userName = ctx.message?.text?.trim();
+    const telegramUsername = ctx.from.username; // Получаем username из Telegram
 
     // Валидация имени
     if (!userName || userName.length < 2) {
@@ -166,8 +164,8 @@ class OnboardingLogic {
     }
 
     try {
-      // Создаем пользователя
-      const createResult = await this.api.createUser(telegramId, userName);
+      // Создаем пользователя с username
+      const createResult = await this.api.createUser(telegramId, userName, telegramUsername);
       
       if (!createResult.success) {
         await safeSendMessage(
@@ -183,9 +181,14 @@ class OnboardingLogic {
       this.userStates.delete(telegramId);
 
       // Отправляем подтверждение регистрации
-      const confirmationText = texts.formatText(texts.welcome.nameConfirm, {
+      let confirmationText = texts.formatText(texts.welcome.nameConfirm, {
         name: userName
       });
+
+      // Добавляем информацию о username если он есть
+      if (telegramUsername) {
+        confirmationText += `\n\n🔗 Ваш username: @${telegramUsername}`;
+      }
       
       await safeSendMessage(ctx, confirmationText, null, { parseMode: 'HTML' });
 
@@ -194,7 +197,8 @@ class OnboardingLogic {
 
       logUserAction(ctx, 'onboarding_completed', {
         userId: createResult.user.id,
-        fullName: createResult.user.full_name
+        fullName: createResult.user.full_name,
+        username: createResult.user.username
       });
 
       return { 
@@ -221,17 +225,10 @@ class OnboardingLogic {
    * [EN] Complete onboarding process
    */
   async completeOnboarding(ctx, user) {
-    // Создаем главное меню
-    const keyboard = createKeyboard([
-      '📅 Предстоящие события',
-      '💬 Мои ответы',
-      '⚙️ Настройки',
-      '❓ Помощь'
-    ], { columns: 2 });
+    // Убираем создание клавиатуры и добавляем инструкцию
+    const completionText = `${texts.welcome.registrationComplete}\n\n${texts.menu.description}\n\n📋 Используйте команду /menu для доступа к функциям.`;
 
-    const completionText = `${texts.welcome.registrationComplete}\n\n${texts.menu.description}`;
-
-    await safeSendMessage(ctx, completionText, keyboard, { parseMode: 'HTML' });
+    await safeSendMessage(ctx, completionText, null, { parseMode: 'HTML' });
   }
 
   /**

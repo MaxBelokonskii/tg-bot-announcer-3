@@ -8,8 +8,14 @@ const { Markup } = require('telegraf');
 /**
  * [RU] Создание клавиатуры с кнопками
  * [EN] Create keyboard with buttons
+ * @deprecated Функция больше не используется. Используйте createInlineKeyboard()
+ * @param {Array} buttons - Array of button texts
+ * @param {Object} options - Keyboard options
+ * @returns {Object} Markup keyboard or removeKeyboard
  */
 function createKeyboard(buttons, options = {}) {
+  console.warn('⚠️ createKeyboard deprecated. Use createInlineKeyboard instead.');
+  
   const {
     columns = 2,
     resize = true,
