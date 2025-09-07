@@ -32,9 +32,7 @@ class MainMenu {
     const menuItems = [
       { text: texts.menu.buttons.changeAttendance, callback_data: 'change_attendance' },
       { text: texts.menu.buttons.eventDetails, callback_data: 'event_details' },
-      { text: texts.menu.buttons.usefulInfo, callback_data: 'useful_info' },
-      { text: texts.menu.buttons.upcomingEvents, callback_data: 'upcoming_events' },
-      { text: texts.menu.buttons.help, callback_data: 'help' }
+      { text: texts.menu.buttons.usefulInfo, callback_data: 'useful_info' }
     ];
 
     // Добавляем админскую кнопку для администраторов
@@ -129,17 +127,11 @@ class MainMenu {
         case 'admin_refresh_guest_list':
           return await this.adminLogic.showGuestList(ctx);
         
-        case 'upcoming_events':
-          return await this.showUpcomingEvents(ctx);
-        
         case 'my_responses':
           return await this.showMyResponses(ctx);
         
         case 'settings':
           return await this.showSettings(ctx);
-        
-        case 'help':
-          return await this.showHelp(ctx);
         
         case 'main_menu':
           return await this.show(ctx);
@@ -167,19 +159,7 @@ class MainMenu {
     }
   }
 
-  /**
-   * [RU] Показ предстоящих событий (заглушка)
-   * [EN] Show upcoming events (placeholder)
-   */
-  async showUpcomingEvents(ctx) {
-    const text = `${texts.events.title}\n\n${texts.events.noEvents}`;
-    const keyboard = createInlineKeyboard([standardButtons.mainMenu], 1);
 
-    await safeSendMessage(ctx, text, keyboard);
-    await ctx.answerCbQuery();
-
-    return { success: true };
-  }
 
   /**
    * [RU] Показ ответов пользователя (заглушка)
@@ -209,19 +189,7 @@ class MainMenu {
     return { success: true };
   }
 
-  /**
-   * [RU] Показ справки
-   * [EN] Show help
-   */
-  async showHelp(ctx) {
-    const text = texts.help.description;
-    const keyboard = createInlineKeyboard([standardButtons.mainMenu], 1);
 
-    await safeSendMessage(ctx, text, keyboard);
-    await ctx.answerCbQuery();
-
-    return { success: true };
-  }
 }
 
 module.exports = {
