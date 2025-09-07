@@ -36,19 +36,35 @@ function createKeyboard(buttons, options = {}) {
  */
 function createInlineKeyboard(buttons, columns = 2) {
   if (!Array.isArray(buttons) || buttons.length === 0) {
+    console.warn("⚠️ Предупреждение: пустой массив кнопок для клавиатуры");
     return Markup.inlineKeyboard([]);
   }
 
   const rows = [];
   for (let i = 0; i < buttons.length; i += columns) {
-    const row = buttons.slice(i, i + columns).map(button => {
-      if (typeof button === 'string') {
-        return Markup.button.callback(button, button);
-      }
-      
-      return Markup.button.callback(button.text, button.callback_data || button.text);
-    });
-    rows.push(row);
+    const row = buttons
+      .slice(i, i + columns)
+      .map((button) => {
+        if (typeof button === "string") {
+          return Markup.button.callback(button, button);
+        }
+
+        // Проверка наличия необходимых полей
+        if (!button.text) {
+          console.error("❌ Ошибка: отсутствует поле text в кнопке:", button);
+          return null;
+        }
+
+        // Используем callback_data для соответствия со спецификацией
+        const callbackData = button.callback_data || button.callback || button.text;
+
+        return Markup.button.callback(button.text, callbackData);
+      })
+      .filter(Boolean); // Убираем null значения
+
+    if (row.length > 0) {
+      rows.push(row);
+    }
   }
 
   return Markup.inlineKeyboard(rows);
@@ -95,7 +111,8 @@ function createMessage(text, keyboard = null, options = {}) {
   };
 
   if (keyboard) {
-    messageOptions.reply_markup = keyboard;
+    // Правильно обрабатываем Markup объекты от Telegraf
+    messageOptions.reply_markup = keyboard.reply_markup || keyboard;
   }
 
   return {
@@ -110,15 +127,25 @@ function createMessage(text, keyboard = null, options = {}) {
  */
 async function safeSendMessage(ctx, text, keyboard = null, options = {}) {
   try {
-    const message = createMessage(text, keyboard, options);
+    const messageOptions = {
+      parse_mode: options.parseMode || 'HTML',
+      disable_web_page_preview: options.disablePreview !== false,
+      disable_notification: options.disableNotification || false
+    };
+
+    // Правильно добавляем клавиатуру в опции
+    if (keyboard) {
+      // Телеграм ожидает объект reply_markup в messageOptions
+      messageOptions.reply_markup = keyboard.reply_markup || keyboard;
+    }
     
     if (ctx.callbackQuery) {
       // Если это callback query, редактируем сообщение
-      await ctx.editMessageText(message.text, message.options);
+      await ctx.editMessageText(text, messageOptions);
       await ctx.answerCbQuery();
     } else {
       // Обычная отправка
-      await ctx.reply(message.text, message.options);
+      await ctx.reply(text, messageOptions);
     }
     
     return { success: true };
